@@ -1,0 +1,2756 @@
+Id,PostTypeId,AcceptedAnswerId,ParentId,CreationDate,DeletionDate,Score,ViewCount,Body,OwnerUserId,OwnerDisplayName,LastEditorUserId,LastEditorDisplayName,LastEditDate,LastActivityDate,Title,Tags,AnswerCount,CommentCount,FavoriteCount,ClosedDate,CommunityOwnedDate,ContentLicense
+64841366,1,,,2020-11-15 05:05:54,,0,2,"<p>hey I've been coding in python for a while and I want to get better, let's say your a business looking to hire me would this be code you would accept else how would I improve it?</p>
+<pre class=""lang-py prettyprint-override""><code>def parseCsv(file,regex):
+    file_data_rows = open(file,'r').readlines()
+    columnTitles = file_data_rows[0].strip().split(regex)
+    columns = {}
+    for column in range(len(columnTitles)):
+        row = []
+        for Row in file_data_rows:
+            row.append(Row.strip().split(regex)[column])
+        columns.update({columnTitles[column]:row})
+    return columns
+</code></pre>
+",11157015.0,,,,,2020-11-15 05:05:54,Is there any better way to write this?,<python><python-3.x><optimization>,0,0,,,,CC BY-SA 4.0
+64841360,1,,,2020-11-15 05:04:27,,0,4,"<p>Currently each column that i want to delimit stores address information and i want each part of the address to have its own subsequent column. Ex. Streets, city, zip codes will all have their own columns. However, i need to do this for all columns stored in my list <strong>address_columns</strong></p>
+<p>Step One.
+All strings before the first comma go in the first column
+all strings before the second comma go in the second column
+all strings before third comma go in the third column
+etc..
+Step Two.
+identify text after the last comma and put it in the last additional comma
+Step Three.
+Repeat for all columns in the list</p>
+<p>address_columns = ['QUESTION_47', 'QUESTION_56', 'QUESTION_65', 'QUESTION_83', 'QUESTION_92']</p>
+<p>(How to the columns look like using Fake addresses)
+QUESTION 47                   |   Question_56                     |  Question_65
+42 Wallaby Way, Sydney, 10084 |   42 Wallaby Way, Sydney, 10084   | 64 Fordham St.
+Toms River, NJ 08753              496 Poor House St, Seattle</p>
+",14638398.0,,,,,2020-11-15 05:04:27,How do i delimit each column by a comma and repeat this for the columns stored in a list?,<python><pandas>,0,0,0.0,,,CC BY-SA 4.0
+64841346,1,,,2020-11-15 05:00:59,,0,4,"<p>I am currently working on a kick command that does a double check with the user before carrying out action for my discord bot, and came up with this:</p>
+<pre class=""lang-py prettyprint-override""><code>@bot.command()
+@commands.has_permissions(manage_guild=True)
+async def kick(ctx,
+               member: discord.Member = None,
+               *,
+               reason=&quot;No reason provided&quot;):
+
+    server_name = ctx.guild.name
+    user = member
+
+    if member == None:
+        await ctx.send(
+            f'{x_mark} **{ctx.message.author.name},** please mention somebody to kick.')
+        return
+
+    if member == ctx.message.author:
+        await ctx.send(
+            f'{x_mark} **{ctx.message.author.name},** you can\'t kick yourself, silly.')
+        return
+
+    embedcheck = discord.Embed(
+        title=&quot;Kick&quot;,
+        colour=0xFFD166,
+        description=f'Are you sure you want to kick **{user}?**')
+
+    embeddone = discord.Embed(
+        title=&quot;Kicked&quot;,
+        colour=0x06D6A0,
+        description=f'**{user}** has been kicked from the server.')
+
+    embedfail = discord.Embed(
+        title=&quot;Not Kicked&quot;,
+        colour=0xEF476F,
+        description=f'The kick did not carry out.')
+
+    msg = await ctx.send(embed=embedcheck)
+    await msg.add_reaction(check_mark)
+    await msg.add_reaction(x_mark)
+
+    def check(rctn, user):
+        return user.id == ctx.author.id and str(rctn) in [check_mark, x_mark]
+
+    while True:
+        try:
+            reaction, user = await bot.wait_for(
+                'reaction_add', timeout=60.0, check=check)
+            if str(reaction.emoji) == check_mark:
+                await msg.edit(embed=embeddone)
+                await user.kick(reason=reason)
+                if reason == None:
+                    await user.send(
+                        f'**{user.name}**, you were kicked from {server_name}. No reason was provided.'
+                    )
+                else:
+                    await user.send(
+                        f'**{user.name}**, you were kicked from {server_name} for {reason}.'
+                    )
+
+                return
+
+            elif str(reaction.emoji) == x_mark:
+                await msg.edit(embed=embedfail)
+                return
+
+        except asyncio.TimeoutError:
+            await msg.edit(embed=embedfail)
+            return
+</code></pre>
+<p>However when I do this, I get the error:</p>
+<pre><code>    raise CommandInvokeError(exc) from exc
+discord.ext.commands.errors.CommandInvokeError: Command raised an exception: Forbidden: 403 Forbidden (error code: 50013): Missing Permissions
+</code></pre>
+<p>I have no clue why this is happening, as the bot has every permission checked, as do I, and I am the server owner. Any help would be appriciated, thank you.</p>
+",14470767.0,,,,,2020-11-15 05:00:59,Discord.py kick command not working (missing perms error),<python><command><discord><discord.py>,0,0,,,,CC BY-SA 4.0
+64841335,1,,,2020-11-15 04:57:44,,0,16,"<p>I am trying to learn R but just can't quite grasp the syntax. Python is just so much more intuitive for me. I am playing with the <code>nycflights13</code> toy dataset in R, and what to figure out how to do this simple execution</p>
+<pre><code>test = df.groupby('tailnum').agg({'flight':'count','arr_delay':'sum'})
+test[(test.flight&gt;=12)].sort_values(by='arr_delay',ascending=False)
+</code></pre>
+<p>and get</p>
+<pre><code>
+      flight arr_delay
+tailnum     
+N15910  280 7317.0
+N15980  316 7134.0
+N16919  251 6904.0
+N228JB  388 6778.0
+N14998  230 6087.0
+... ... ...
+N711ZX  291 -2154.0
+N722TW  314 -2199.0
+N721TW  318 -2285.0
+N718TW  328 -2335.0
+N727TW  275 -2642.0
+</code></pre>
+<p>I tried the following, but the numbers are off. I'm missing something.</p>
+<pre><code>test &lt;- flights %&gt;%
+  group_by(tailnum) %&gt;%
+    filter(n()&gt;=12) %&gt;%
+  summarize(total_delay = sum(arr_delay))
+
+test[order(test$total_delay,decreasing = FALSE),]
+</code></pre>
+<p>and got</p>
+<pre><code>
+tailnum total_delay
+&lt;chr&gt;   &lt;dbl&gt;
+N961UW  -1197           
+N37700  -1148           
+N3754A  -1084           
+N847VA  -1006   
+...
+N179JB  4449    
+</code></pre>
+<p>In short, python user is a complete noob with R and trying to get better, plz help</p>
+",13132728.0,,,,,2020-11-15 05:05:54,Simple translation from Python to R,<python><r>,1,0,,,,CC BY-SA 4.0
+64841325,1,,,2020-11-15 04:56:00,,0,8,"<p><a href=""https://i.stack.imgur.com/veWx5.png"" rel=""nofollow noreferrer"">I am new to Webscraping and Beautifulsoup , And i thought of scraping this webpage but i am getting blank list, I am not getting where i am doing wrong please look at the attached image and help me out with it</a></p>
+",14640791.0,,,,,2020-11-15 04:56:00,Getting blank list while doing webscraping,<python><web-scraping>,0,1,,,,CC BY-SA 4.0
+64841308,1,,,2020-11-15 04:51:34,,0,7,"<p>I am attempting to teach myself how to use discord.py, and I am trying to make a bot that will be able to recognize which guild it received a command from, and refrence another file, so it can have individual presets per server, but my problem is that Guild.id does not seem to get the ID, and spits out &lt;member 'id' of 'Guild' objects&gt; in the shell, where I would expect the guild ID to be printed, and I am lost as to what could possibly be wrong.</p>
+<p>The part I am not able to get work is only the last 'elif' prompt, but I added the rest of the code for more context, in case it is an error earlier in my code.</p>
+<pre><code>import discord
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+#Bootup confirmation
+    print(&quot;We have logged in as {0.user}&quot;.format(client))
+
+@client.event
+async def on_message(message):
+    #Debugging reference
+    print(&quot;{0.guild} - {0.author}: {0.content}&quot;.format(message))
+
+    #Check if message is from bot and return if true
+    if message.author == client.user:
+        return
+
+    #Check if message contains $test and return a response
+    elif message.content.startswith(&quot;$test&quot;):
+        await message.channel.send(&quot;Hello!&quot;)
+        
+
+    elif message.content.startswith(&quot;$id&quot;):
+        gid = discord.Guild.id
+        print(gid)
+</code></pre>
+",10332661.0,,,,,2020-11-15 04:51:34,discord.Guild.id will only return <member 'id' of 'Guild' objects>,<python><discord.py>,0,0,,,,CC BY-SA 4.0
+64841297,1,,,2020-11-15 04:50:35,,0,4,"<p>Platform</p>
+<pre><code>{ ubuntu 18.04 }
+{ psutil version: '5.7.3')&quot; }
+{ python version : 3.6.9}
+</code></pre>
+<p>i'm trying to get pc details like user name , ram and memory usage using python script.it is working fine while running normally.but it returns empty [] output while running in crontab file on startup.</p>
+<pre><code>1.the psutil module successfully imported in crontab
+2.i can print the psutil file location in the python log while running in cron.
+</code></pre>
+<p>Please help me solve this issue</p>
+",10835136.0,,,,,2020-11-15 04:50:35,Psutil module return empty in crontab,<python-3.x><cron><ubuntu-18.04><psutil>,0,0,,,,CC BY-SA 4.0
+64841285,1,,,2020-11-15 04:48:02,,0,9,"<p><a href=""https://i.stack.imgur.com/r4s8n.png"" rel=""nofollow noreferrer"">code</a></p>
+<p>I'm using Pycharm. I created a new app called pages that's part of this tutorial on Youtube. I created some functions in the pages/views.py. Then I went to urls.py to import the functions and add the URLs. But the IDE can't find pages.</p>
+<p>I tried restarting Pycharm/invalidating the caches, and that did not work.</p>
+<p>Please let me know if you have any ideas.</p>
+",8616652.0,,,,,2020-11-15 04:48:02,Unresolved Reference in Pycharm Using Django,<python><django>,0,0,,,,CC BY-SA 4.0
+64841274,1,,,2020-11-15 04:44:38,,0,13,"<p>I created a basic GUI and want to take inputs from the user. I used tkinter for most of the code. Here is the code-</p>
+<pre><code>class myGUI:
+    global InA0, Inb, InC, Ina, InL
+
+    def __init__(self, master):
+        self.master = master
+        master.title(&quot;Flow through nozzles&quot;)
+
+        self.label = Label(master, text =&quot;Consider the incompressible flow of a fluid through a nozzle. The area of the nozzle is given by A = A0(1−bx) and the inlet velocity varies according to U=C(1+at), where&quot;)
+        self.label.grid(rowspan=1)
+
+        self.labA = Label(master, text =&quot;A0&quot;)
+        self.labA.grid(row=2,column=1)
+        self.InA0 = Entry(master)
+        self.InA0.grid(row=2,column=2)
+        ....
+        there is code for 4 more variables with the same code as the above 4 lines
+        ....     
+        
+        self.inputbutton = Button(master, text=&quot;Submit&quot;, command=self.inputs())
+        self.inputbutton.grid(row=5, column=1)
+
+        self.close_button = Button(master, text=&quot;Close&quot;, command=master.quit)
+        self.close_button.grid(row=5, column=2)
+
+    def greet(self):
+        print(&quot;Greetings!&quot;)
+
+    def inputs(self):
+        global A0, L, b, a, C
+        A0 = InA0.get()
+        b = Inb.get()
+        C = InC.get()
+        a = Ina.get()
+        L = InL.get()
+        print(A0, b, C, a, L)
+</code></pre>
+<p>I wanna access the entry variables from the class so that i can take input values from the user.</p>
+<p>When i run the code it says that the name &quot;InA0&quot; is not defined. I am quite a noob at programming and this my first time writing code for a gui. I have tried to access the variables in the class through different ways but i just dont know how to access the variables.</p>
+",14640750.0,,7432.0,,2020-11-15 04:59:32,2020-11-15 04:59:32,How do i access the entry variables in my gui class in another function?,<python-3.x><tkinter>,1,0,,,,CC BY-SA 4.0
+64841263,1,,,2020-11-15 04:43:28,,0,9,"<p>I am trying to run a demo.py from the github.
+And the error I met is ModuleNotFoundError: No module name 'torch'.
+Then I install it by using the cmd: pip install torch and the cmd said that Requirement already satisfied: torch in C:\users...\site-packages(1.7.0).
+My question is what could I do to run my program?</p>
+",14640788.0,,,,,2020-11-15 04:48:01,How can I run my program when I already had the module and the error said: ModuleNotFoundError?,<python><python-3.x><module><torch><requirements-management>,1,0,,,,CC BY-SA 4.0
+64841257,1,,,2020-11-15 04:40:24,,1,11,"<p>The example below describes my problem well:</p>
+<pre><code>class MyClass:
+    def start(self):
+        self.pre_action()
+        self.required_action()
+        self.required_action2()
+        self.post_action()
+
+    def pre_action(self, *args, **kwargs):
+        pass
+
+    def required_action(self, arg1, arg2, *args, **kwargs):
+        pass
+
+    def required_action2(self, arg1, args2, *args, **kwargs):
+        pass
+
+    def post_action(self, *args, **kwargs):
+        pass
+
+class ChildClass(MyClass):
+    def required_action(self, arg1, arg2, *args, **kwargs):
+        #Do something
+
+    def post_action(self, *args, **kwargs):
+        #Do something
+
+obj = ChildClass()
+obj.start()
+</code></pre>
+<p>I don't know where I should pass the method arguments when calling them by the start method.</p>
+",12721558.0,,,,,2020-11-15 04:50:01,How to pass the arguments of the methods of my child class that are invoked by a calling method?,<python><inheritance><template-method-pattern>,1,0,,,,CC BY-SA 4.0
+64841240,1,,,2020-11-15 04:37:28,,0,5,"<pre><code>import pandas as pd
+import numpy as np
+import math
+import csv
+import sklearn
+import collections
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.model_selection import cross_val_score
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.metrics import classification_report
+from sklearn import linear_model
+from sklearn import tree
+from sklearn.model_selection import train_test_split
+NFL_data=pd.read_csv(Stats45.csv&quot;)
+NFL_data.head()
+teams_pd=pd.read_csv(teamID.csv&quot;)
+teamList=teams_pd[&quot;Team_Name&quot;].tolist()
+teams_pd.tail()
+print(teams_pd[teams_pd[&quot;Team_Name&quot;] == &quot;Cardinals&quot;])
+def getAnnualTeamData(team_id, year):
+annual_data=NFL_data[NFL_data[&quot;Season&quot;] == year]
+
+#points scored in wins and losses
+gamesHome=annual_data[annual_data[&quot;HomeTeam&quot;] == team_id]
+TotalPointsScored = gamesHome[&quot;HomeScore&quot;].sum()
+gamesAway=annual_data[annual_data[&quot;AwayTeam&quot;] == team_id]
+totalGames=gamesHome.append(gamesAway)
+numGames=len(totalGames.index)
+TotalPointsScored+=gamesAway[&quot;AwayScore&quot;].sum()
+
+#total points scored
+#TotalPointsScored+=gamesAway[&quot;AwayScore&quot;].sum()
+#total points allowed
+TotalPointsAllowed = gamesHome[&quot;HomeScore&quot;].sum()
+TotalPointsAllowed += gamesAway[&quot;AwayScore&quot;].sum()
+
+#Total Penalties
+TotalPenalties = gamesHome[&quot;HPenalties&quot;].sum()
+TotalPenalties += gamesAway[&quot;APenalties&quot;].sum()
+#TotalpenaltyYards = gamesHome[&quot;HPYards&quot;].sum()
+#TotalpenaltyYards += gamesAway[&quot;APYards&quot;].sum()
+
+#Total Fumbles lost
+TotalFumblesLost = gamesHome[&quot;HFL&quot;].sum()
+TotalFumblesLost += gamesAway[&quot;AFL&quot;].sum()
+
+#Total Interceptions
+totalInterceptionsThrown = gamesHome[&quot;HINT&quot;].sum()
+totalInterceptionsThrown += gamesAway[&quot;AINT&quot;].sum()
+
+#First downs
+FirstDowns = gamesHome[&quot;HoneDown&quot;].sum()
+FirstDowns += gamesAway[&quot;AOneDowns&quot;].sum()
+
+#Third down attempts and conversions
+ThirdDownAttempts = gamesHome[&quot;HTDA&quot;].sum()
+ThirdDownAttempts += gamesAway[&quot;ATDA&quot;].sum()
+thirdDownconversions = gamesHome[&quot;HTDC&quot;].sum()
+thirdDownconversions += gamesAway[&quot;ATDC&quot;].sum()
+
+#Fourth down attemps and conversions
+FourthDownAttempts = gamesHome[&quot;HFDA&quot;].sum()
+FourthDownAttempts += gamesAway[&quot;AFDA&quot;].sum()
+fourthdownconversions = gamesHome[&quot;HFDC&quot;].sum()
+fourthdownconversions += gamesAway[&quot;AFDC&quot;].sum()
+
+#Time of possession
+#TimeofPossession = gamesHome[&quot;HTOP&quot;].sum()
+#TimeofPossession += gamesAway[&quot;ATOP&quot;].sum()
+
+#Rushing yards and rushing attempts
+#RushingYards = gamesHome[&quot;HRY&quot;].sum()
+#RushingYards += gamesAway[&quot;ARY&quot;].sum()
+rushingattempts = gamesHome[&quot;HRA&quot;].sum()
+rushingattempts += gamesAway[&quot;ARA&quot;].sum()
+
+
+#passing attempts
+PassingAttempts = gamesHome[&quot;HPA&quot;].sum()
+PassingAttempts +=gamesAway[&quot;APA&quot;].sum()
+
+#Passing completions
+PassingComp = gamesHome[&quot;HPC&quot;].sum()
+PassingComp += gamesAway[&quot;APC&quot;].sum()
+
+
+
+
+
+#Net passing yards
+#Netpassingyards = gamesHome[&quot;HPY&quot;].sum()
+#NetPassingyards += gamesAway[&quot;ANPY&quot;].sum()
+
+#passing attempts
+#PassingAttempts = gamesHome[&quot;HPA&quot;].sum()
+#PassingAttempts +=gamesAway[&quot;APA&quot;].sum()
+
+#Passing completions
+#PassingComp = gamesHome[&quot;HPC&quot;].sum()
+#PassingComp += gamesAway[&quot;APC&quot;].sum()
+
+#Games won percentage
+gamesWon=annual_data[annual_data[&quot;Winner&quot;] == team_id]
+gamesLost=annual_data[annual_data[&quot;Loser&quot;] == team_id]
+numGamesWon=len(gamesWon.index)
+numGamesLost=len(gamesLost.index)
+if numGames !=0:
+    gamesWonPercentage = numGamesWon/numGames
+#if team is not in dataset
+if numGames == 0:
+    gamesWon = 0
+    gamesLost = 0
+    TotalPointsScored = 0
+    TotalPointsAllowed = 0
+    TotalPenalties = 0
+    TotalpenaltyYards = 0
+    TotalFumblesLost = 0
+    totalInterceptionsThrown = 0
+    FirstDowns = 0
+    ThirdDownAttempts = 0
+    thirdDownconversions = 0
+    FourthDownAttempts = 0
+    fourthdownconversions = 0
+    TimeofPossession = 0
+    RushingYards = 0
+    rushingattemps = 0
+    PassingAttempts = 0
+    PassingComp = 0
+    gamesWonPercentage = 0
+return [TotalPointsScored, TotalPointsAllowed,TotalPenalties,
+   TotalFumblesLost, totalInterceptionsThrown, FirstDowns, ThirdDownAttempts, 
+    thirdDownconversions, FourthDownAttempts,fourthdownconversions,
+    rushingattempts, PassingAttempts, PassingComp]
+#return [TotalPointsScored,TotalPointsAllowed, TotalPenalties,
+ #      TotalpenaltyYards, TotalFumblesLost,
+#totalInterceptionsThrown, FirstDowns, ThirdDownAttempts,
+ #   thirdDownconversions, FourthDownAttempts,
+#fourthdownconversions, TimeofPossession, gamesWonPercentage]
+getAnnualTeamData(&quot;Ravens&quot;, 2019)
+def createAnnualDict(season):
+ annualDictionary = collections.defaultdict(list)
+for team in teamList:
+    team_vector = getAnnualTeamData(team, season)
+    annualDictionary[team] = team_vector
+return annualDictionary
+  createAnnualDict(2019)
+  def getTrainingData(Season):
+     totalNumGames=0
+ for year in years:
+    annual = NFL_data[NFL_data[&quot;Season&quot;] == year]
+    totalNumGames +=len(annual.index)
+    numFeatures = len(getAnnualTeamData(&quot;Cowboys&quot;, 2018))
+    xTrain = np.zeros((totalNumGames, numFeatures))
+   yTrain = np.zeros((totalNumGames))
+   indexCounter = 0
+   for year in years:
+    team_vectors=createAnnualDict(season)
+    annual=NFL_data[NFL_data[&quot;Season&quot;] == year]
+    numGamesInYear = len(annual.index)
+    xTrainAnnual = np.zeros((numGamesInYear, numFeatures))
+    yTrainAnnual = np.zeros((numGamesInYear))
+    counter=0
+    for index, row in annual.iterrows():
+        h_team  = row[&quot;HomeTeam&quot;]
+        h_vector = team_vectors[h_team]
+        a_team = row[&quot;AwayTeam&quot;] 
+        a_vector = team_vectors[a_team]
+        diff = [a-b for a, b in zip(h_vector, a_vector)]
+        if (counter % 2 == 0):
+            if len(diff) != 0:
+                xTrainAnnual[counter] = diff
+            yTrainAnnual[counter] = 1
+        else:
+            if len(diff) != 0:
+                xTrainAnnual[counter] = [ -p for p in diff]
+            yTrainAnnual[counter] = 0
+        counter +=1
+    xTrain[indexCounter:numGamesInYear+indexCounter] = xTrainAnnual
+    yTrain[indexCounter:numGamesInYear+indexCounter] = yTrainAnnual
+    indexCounter += numGamesInYear
+return xTrain, yTrain
+season=range(2003,2019)
+xTrain, yTrain = getTrainingData(season)
+np.save(&quot;xTrain&quot;, xTrain)
+np.save(&quot;yTrain&quot;, yTrain)
+model=LinearRegression()
+rfe = RFE(model, 9)
+  rfe = rfe.fit(xTrain, yTrain)
+  print(rfe.support_)
+  print(rfe.ranking_)
+  lm=LinearRegression()
+  xTrain, X_test, yTrain, y_test = train_test_split(xTrain, yTrain.reshape(-1,1))
+  print(xTrain.shape, yTrain.shape)
+  print(X_test.shape, y_test.shape)
+  model2=lm.fit(xTrain, yTrain)
+  predictions=lm.predict(X_test)
+  print(sum(predictions)/len(predictions))
+    def createGamePrediction(team1_vector, team2_vector, xTrain, yTrain):
+      xTrain, X_test, yTrain, Y_test= train_test_split(xTrain, yTrain)
+      xTrain.shape, yTrain.shape
+       X_test.shape, y_test.shape
+       lm = linear_model.LinearRegression()
+       model2=lm.fit(xTrain, yTrain)
+      #diff = [a - b for a, b in zip(team1_vector, team2_vector)]
+      diff=[a - b for a, b in zip(team1_vector, team2_vector)]
+      predictions=lm.predict(diff)
+      return predictions
+      team1_name=&quot;Washington&quot;
+      team2_name=&quot;Ravens&quot;
+      team1_vector=getAnnualTeamData(&quot;Washington&quot;, 2019)
+      team2_vector=getAnnualTeamData(&quot;Ravens&quot;, 2019)
+      print('Probability that ' + team1_name + ' wins:',createGamePrediction(team1_vector, 
+       team2_vector, 
+      xTrain, yTrain))
+        print('Probability that ' + team2_name + ' wins:',createGamePrediction(team2_vector, 
+        team1_vector, 
+        xTrain, yTrain))
+</code></pre>
+<p>Here is the ValueError that keeps showing up:</p>
+<pre><code>    ValueError: Expected 2D array, got 1D array instead:
+    array=[-277 -277  -10    0    3 -167  -26  -47  -14  -11 -268  -20  -22].
+    Reshape your data either using array.reshape(-1, 1) if your data has a single feature or 
+    array.reshape(1, -1) if it contains a single sample.
+</code></pre>
+<p>If anyone could help it would be greatly appreciated.
+I have tried reshaping the data and nothing seems to be working, I might be reshaping the data in the wrong part of the code. But this error is puzzling to me.</p>
+<p>It busts at the start of the team1_name= part of the code.
+the rest of the code works</p>
+",13888387.0,,,,,2020-11-15 04:37:28,ValueError expected 2D array got 1D array when trying to predict the outcome of an event,<python-3.x><valueerror>,0,0,,,,CC BY-SA 4.0
+64841225,1,,,2020-11-15 04:34:01,,-5,29,"<p>This question has loops and else statements and try and except too. This is the <a href=""https://i.stack.imgur.com/G6jw9.png"" rel=""nofollow noreferrer"">question page</a>
+[Click on the link for the question]</p>
+<p>And I have done some coding but I'm not sure if its right. Here it is:</p>
+<p><em>`pass_credits=int(input(&quot;Please enter your credits at pass:&quot;))</em></p>
+<p><em>defer=int(input(&quot;please enter your credits at defer:&quot;))</em></p>
+<p><em>fail=int(input(&quot;please enter your credits at fail:&quot;))</em></p>
+<p><em>if pass_credits==120 and defer==0 and fail ==0:</em>
+<em>print(&quot;Progress&quot;)</em></p>
+<p><em>elif pass_credits==100 and defer or fail ==0:</em>
+<em>print(&quot;Progress(module trailer)&quot;)</em></p>
+<p><em>elif pass_credits&gt;40 and fail&lt;=60:</em>
+<em>print(&quot;DO not progress - module retriever&quot;)</em></p>
+<p><em>elif pass_credits==40 and fail==80:</em>
+<em>print(&quot;Exclude&quot;)</em></p>
+<p><em>elif pass_credits==20 and fail&lt;80:</em>
+<em>print(&quot;Do not progress - module retriever&quot;)</em></p>
+<p><em>elif pass_credits==20 and fail&gt;=80:</em>
+<em>print(&quot;Exclude&quot;)</em></p>
+<p><em>elif pass_credits==0 and fail&lt;80:</em>
+<em>print(&quot;Do not progress - module retriever&quot;)</em></p>
+<p><em>elif pass_credits==0 and fail&gt;=80:</em>
+<em>print(&quot;Exclude&quot;)`</em></p>
+<p>Thanks for all and any help.</p>
+",14623931.0,,14623931.0,,2020-11-15 04:36:35,2020-11-15 04:36:35,i have a programming coursework given to me. It has loops and else statements,<python>,0,4,,2020-11-15 04:43:01,,CC BY-SA 4.0
+64841205,1,,,2020-11-15 04:30:10,,0,12,"<p>I am a beginner to web development with Django. I have been trying to use docker-compose as a part of the lectures but due to some issues, I am not able to run the server.</p>
+<p>This is my docker-compose.yml file:</p>
+<pre><code>version: '3'
+
+
+
+services:
+
+db:
+
+image: postgres
+
+environment:
+
+- POSTGRES_DB=postgres
+
+- POSTGRES_USER=postgres
+
+- POSTGRES_PASSWORD=1029384756Vithayathil
+
+
+ports:
+
+- &quot;5432:5432&quot;
+
+migration:
+
+build: .
+
+command: python3 manage.py migrate
+
+volumes:
+
+- .:/usr/src/app
+
+depends_on:
+
+- db
+
+web:
+
+build: .
+
+command: python3 manage.py runserver
+
+volumes:
+
+- .:/usr/src/app
+
+ports:
+
+- &quot;8000:8000&quot;
+
+depends_on:
+
+- db
+
+- migration
+</code></pre>
+<p>This is my DockerFile:</p>
+<pre><code>FROM python:3
+
+WORKDIR /usr/src/app
+
+ADD requirements.txt /usr/src/app
+
+RUN pip install -r requirements.txt
+
+ADD . /usr/src/app
+</code></pre>
+<p>This is my database in settings.py:</p>
+<pre><code>DATABASES = {
+
+'default': {
+
+'ENGINE': 'django.db.backends.postgresql',
+
+'NAME': 'postgres',
+
+'USER': 'postgres',
+
+'HOST': 'db',
+
+'PASSWORD':'**********',
+
+'PORT': 5432,
+
+}
+
+}
+</code></pre>
+<p>On doing docker-compose up command, these things happen:</p>
+<pre><code>Starting airline4_db_1 ... done Starting airline4_migration_1 ... done Starting airline4_web_1 ... done Attaching to airline4_db_1, airline4_migration_1, airline4_web_1
+
+db_1 |
+
+db_1 | PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+db_1 |
+
+db_1 | 2020-11-07 15:37:00.770 UTC [1] LOG: starting PostgreSQL 13.0 (Debian 13.0-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+
+db_1 | 2020-11-07 15:37:00.789 UTC [1] LOG: listening on IPv4 address &quot;0.0.0.0&quot;, port 5432
+
+db_1 | 2020-11-07 15:37:00.790 UTC [1] LOG: listening on IPv6 address &quot;::&quot;, port 5432
+
+db_1 | 2020-11-07 15:37:01.179 UTC [1] LOG: listening on Unix socket &quot;/var/run/postgresql/.s.PGSQL.5432&quot;
+
+db_1 | 2020-11-07 15:37:01.647 UTC [26] LOG: database system was shut down at 2020-11-07 10:55:06 UTC
+
+db_1 | 2020-11-07 15:37:02.449 UTC [1] LOG: database system is ready to accept connections
+
+web_1 | Watching for file changes with StatReloader
+
+migration_1 | Operations to perform:
+
+migration_1 | Apply all migrations: admin, auth, contenttypes, flights, sessions
+
+migration_1 | Running migrations:
+
+migration_1 | No migrations to apply.
+
+airline4_migration_1 exited with code 0
+</code></pre>
+<p>But when I try going to 127.0.0.1:8000 on my browser, I see a message, 'This page isn't working'.</p>
+<p>Any help will be great! Thanks in advance</p>
+<pre><code>When I tried 'docker-compose ps' command, it says like this
+
+    Name Command State Ports
+
+---------------------------------------------------------------------
+
+airline4_db_1 docker-entrypoint.sh postgres Exit 0
+
+airline4_migration_1 python3 manage.py migrate Exit 0
+
+airline4_web_1 python3 manage.py runserver Exit 0
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+88d8655af03a        airline4_web        &quot;python3 manage.py r…&quot;   24 seconds ago      Up 18 seconds       0.0.0.0:8000-&gt;8000/tcp   airline4_web_1
+bec29de59ee1        postgres            &quot;docker-entrypoint.s…&quot;   7 minutes ago       Up 32 seconds       5432/tcp                 airline4_db_1
+</code></pre>
+<p>This is what I get now on docker ps command</p>
+",14640760.0,,,,,2020-11-15 04:30:10,Django not running on localhost when using with Docker,<javascript><python><django><docker><web>,0,0,,,,CC BY-SA 4.0
+64841184,1,,,2020-11-15 04:24:04,,0,8,"<p>If I create an array</p>
+<pre><code>arr = np.ones((10,5,5,100))
+</code></pre>
+<p>and try to get the data for axis 0 index 1, axis 1 all, axis 2 all, axis 3 indices 2,5,10</p>
+<pre><code>axis3_inds = [2,5,10]
+newarr = arr[0,:,:,axis3_inds]
+</code></pre>
+<p><code>newarr</code> has shape <code>(3,5,5)</code>.</p>
+<p>I was expecting shape `(5,5,3)'.</p>
+<p>Why does this happen?</p>
+<p>I can get the desired data &amp; shape by</p>
+<pre><code>newarr = arr[0,:,:,:][:,:,axis3_inds]  #newarr has shape (5,5,3)
+</code></pre>
+",3731622.0,,,,,2020-11-15 04:24:04,Indexing numpy array with list gives unexpected shape,<python><indexing><numpy-ndarray>,0,1,,,,CC BY-SA 4.0
+64841180,1,,,2020-11-15 04:23:10,,0,7,"<p>There's a list of events in DB (MongoDB now, but could switch to any other solution). Each even has a specific datetime with timezone when it needs to be fired. By &quot;fired&quot; I mean custom API call, signal, anything similar.</p>
+<p>Currently, I keep the DB table sorted by datetime and check the first entries every second to check if it's ready to fire. It works, stable enough, but doesn't feel like an optimal one.</p>
+<p>Another solution could be using AirFlow and generating DAGs, but it's more regularly-focused (like every Wednesday at 3:00 AM), so even while it's possible to fire predefined events with enabling limits, it feels &quot;hacky&quot;. Message queues like RabbitMQ or Kafka possibly won't fit also, because the idea is to fire the event at the specific datetime (maybe even to add it to some queue), not just to process it when it's fired.</p>
+<p>So, is there any task-specific tool or DB solution to work with such a task? Or the current solution of checking first entries is good enough?</p>
+",1598470.0,,,,,2020-11-15 04:23:10,What's the optimal tool to fire scheduled events with datetime from DB?,<python><database><scheduled-tasks><airflow><message-queue>,0,0,,,,CC BY-SA 4.0
+64841159,1,,,2020-11-15 04:16:19,,-3,20,"<pre><code>#program with two functions
+def add(x,y):
+&quot;&quot;&quot;
+This function takes two numbers and finds their sum.
+It displays the sum as result.
+&quot;&quot;&quot;
+print(&quot;sum=&quot;,(x+y))
+def message():
+'''
+This function displays a message.
+This is a welcome message to the user.
+'''
+print(&quot;welcome to python&quot;)
+#now call the functions
+add(10,25)
+message()
+</code></pre>
+",14640744.0,,2617068.0,,2020-11-15 04:16:52,2020-11-15 04:23:17,"What is wrong in the following program?it shows indentation error and x not defined,how to never get indentation error?",<python><python-3.x><function>,1,6,,2020-11-15 04:27:14,,CC BY-SA 4.0
+64841137,1,,,2020-11-15 04:12:01,,-1,27,"<pre><code>def words(letter):
+    index_letter = str(&quot;a&quot;, &quot;i&quot;, &quot;u&quot;, &quot;e&quot;, &quot;o&quot;)
+    for item in letter:
+        if item.__contain__(index_letter):
+            continue
+        return item
+
+print(words('almas'))
+</code></pre>
+<pre><code>TypeError: str() takes at most 3 arguments (5 given)
+</code></pre>
+<p>I'm creating a program that will remove every vowel letter from a string. But this error 'TypeError: str() takes at most 3 arguments (5 given)' keep popping up. What should I do? I'm a beginner.</p>
+",14640679.0,,47453.0,,2020-11-15 04:13:21,2020-11-15 04:13:21,I'm creating a program that will remove every vowel letter,<python>,0,4,,2020-11-15 04:18:31,,CC BY-SA 4.0
+64841121,1,,,2020-11-15 04:09:23,,0,15,"<p>I can open the chrome user i wanted to open but the selenium wont go to the url i type. Below is my code and output after it open the chrome user.</p>
+<p>Code:</p>
+<pre><code>from selenium import webdriver
+
+from selenium.webdriver.chrome.options import Options
+
+options = webdriver.ChromeOptions()
+
+options.add_argument(&quot;user-data-dir=C:\\Users\\eugen\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1&quot;)
+
+driver = webdriver.Chrome(executable_path=r'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', chrome_options=options)
+
+driver.get('https://www.google.com')
+
+</code></pre>
+<p><strong>Ouput</strong>:</p>
+<blockquote>
+<p>selenium.common.exceptions.WebDriverException: Message: Service C:\Program Files (x86)\Google\Chrome\Application\chrome.exe unexpectedly exited. Status code was: 0</p>
+</blockquote>
+",14624840.0,,5515287.0,,2020-11-15 05:02:11,2020-11-15 05:02:11,How to open a specific chrome user using selenium in python?,<python><selenium><google-chrome><automation><selenium-chromedriver>,0,0,1.0,,,CC BY-SA 4.0
+64841096,1,,,2020-11-15 04:03:42,,1,11,"<p>I am working with YOLOv3 and I customize the cfg file using my own dataset. End the YOLOv3 object detection project I faced an error and that is <strong>File Not Find Error</strong> type.
+<strong>Below the upload the script.py script to cloud VM from Google Drive,</strong></p>
+<pre><code>!cp /mydrive/custommodel/script.py ./
+
+!ls
+
+9k.tree     eagle.jpg    imagenet.labels.list      obj.names         script.py
+coco9k.map  giraffe.jpg  imagenet.shortnames.list  openimages.names  voc.names
+coco.names  goal.txt     labels            person.jpg
+dog.jpg     horses.jpg   obj.data          scream.jpg
+</code></pre>
+<p><strong>script.py</strong> file is successfully uploaded.</p>
+<p><strong>Now, I faced an error in below, please concern here,</strong></p>
+<pre><code>!python script.py
+</code></pre>
+<p><strong>after run the above code, error is occurred,</strong></p>
+<pre><code>Traceback (most recent call last):
+  File &quot;script.py&quot;, line 4, in &lt;module&gt;
+    os.chdir(os.path.join(&quot;data&quot;, &quot;obj&quot;))
+FileNotFoundError: [Errno 2] No such file or directory: 'data/obj'
+</code></pre>
+<p><strong>Note:</strong> For running the above code, It will create a train.txt file where will stored all of own dataset in required file then I can run it for training. But is showed an error and that is file directory.</p>
+",14536611.0,,,,,2020-11-15 04:03:42,FileNotFoundError: [Errno 2] No such file or directory: 'data/obj' in Python,<python><deep-learning><object-detection><yolo>,0,1,,,,CC BY-SA 4.0
+64841086,1,,,2020-11-15 04:02:09,,0,16,"<p>I am trying to below file operation using python</p>
+<p>input 1: unix shell cat command given below data file name: input1.txt</p>
+<pre><code>11/13/2020 07:41:09 TREE count1: id1 green001
+11/13/2020 07:43:09 TREE count1: id1 black001
+11/13/2020 07:45:09 TREE count1: id2 black001
+11/13/2020 07:45:09 PLAN count1: id3 green002
+</code></pre>
+<p>Lookup data: file name: lookup.csv</p>
+<pre><code>ID,item,message
+id1,item1,message 1
+id2,item2,message 2
+id3,item3,message 3
+</code></pre>
+<p>Need output like: where id field in [id1, id2, id3, etc ..in] input1 lookup in ID filed in lookup table.\</p>
+<p>Output.txt</p>
+<pre><code>Time,Type,counts,id,item,message,colour
+11/13/2020 07:41:09,TREE,count1,id1,item1,message 1,green001
+11/13/2020 07:43:09,TREE,count1,id1,item1,message 1,black001
+11/13/2020 07:45:09,TREE,count1,id2,item2,message 2,black001
+11/13/2020 07:45:09,PLAN,count1,id3,item3,message 3,green002
+</code></pre>
+<p>I've been trying to use this code, but I am getting errors.</p>
+<pre><code>r = pandas.read_csv(file1, sep=' ', index_col='ID')
+with open('/home/s/lookup.csv','r') as w:
+    x = pandas.read_csv(w)
+    # w is not indexable
+    col = w['ID']
+    for line in w:
+        # w is not a table.
+        for col in w:
+            for row in r:
+                if row in col:
+                    print(line)
+</code></pre>
+<p>Any advice would be appreciated!</p>
+",14632454.0,,,,,2020-11-15 04:43:33,One data lookup in another csv file and print first data values with lookup values,<python>,2,1,,,,CC BY-SA 4.0
+64841083,1,,,2020-11-15 04:01:18,,0,10,"<p>The <a href=""https://networkx.org/documentation/stable/tutorial.html#nodes"" rel=""nofollow noreferrer"">networkx tutorial</a> hints the possibility of adding a node with attributes.</p>
+<blockquote>
+<p>You can also add nodes along with node attributes if your container yields 2-tuples of the form <code>(node, node_attribute_dict)</code></p>
+</blockquote>
+<p>When I try it with the <code>add_node</code> method, I get a TypeError:</p>
+<pre class=""lang-py prettyprint-override""><code>&gt;&gt;&gt; import networkx as nx
+&gt;&gt;&gt; G = nx.Graph()
+&gt;&gt;&gt; G.add_node(('person1', {'name': 'John Doe', 'age': 40}))
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;/media/windows/Users/godidier/Projects/semlab/research/env/lib/python3.7/site-packages/networkx/classes/graph.py&quot;, line 506, in add_node
+    if node_for_adding not in self._node:
+TypeError: unhashable type: 'dict'
+</code></pre>
+<p>What am I missing ? or is adding nodes with attributes only possible with the <code>add_nodes_from</code> method ?</p>
+",1264899.0,,,,,2020-11-15 04:01:18,Adding a node with attribute in a NetworkX graph,<python><networkx>,0,0,,,,CC BY-SA 4.0
+64841082,1,,,2020-11-15 04:01:01,,0,17,"<p>Yesterday, my program was working perfectly fine. However, today it stopped working. I think that it may have something to do with the latest Mac OS update, as I had just installed it today. My testing code is shown below</p>
+<pre><code>import matplotlib.pyplot as plt
+import numpy as np
+print(&quot;ehllow&quot;)
+zeroes = np.zeros((10,10))
+plt.imshow(zeroes)
+plt.show()
+</code></pre>
+<p>Everything is going fine until I get to plt.show(). I had tried removing it, and the program ran smoothly, but once I added it back in I got the error</p>
+<blockquote>
+<p>Segmentation fault: 11</p>
+</blockquote>
+<p>and then it shows a python crash screen<a href=""https://i.stack.imgur.com/r3w34.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/r3w34.png"" alt=""enter image description here"" /></a></p>
+<p>I have python version 3.7.6 64 bit for Mac.</p>
+",13913148.0,,,,,2020-11-15 04:27:26,Segmentation fault: 11 python after upgrading to OS Big Sur,<python><matplotlib><macos-big-sur>,2,0,,,,CC BY-SA 4.0
+64841080,1,,,2020-11-15 04:00:12,,0,14,"<p>So I am trying to take user input for the IP address that I want the server to connect to however anytime I use my user input the server fails to connect with the error <em>[Errno 11001] getaddrinfo</em> <em>failed</em></p>
+<p>This is the original code that does not work</p>
+<pre><code>    IP = raw_input('Connect to IP:')
+    IP2 = '127.0.0.1'
+    try:
+        server.connect((IP, PORT))
+</code></pre>
+<p>However if I then attempt to use IP2 it works perfectly I have no idea why they would not be the same if I type in 127.0.0.1 on my own.</p>
+<p>Any help would be greatly appreciated</p>
+",11567351.0,,,,,2020-11-15 04:44:02,User input error when using python's socket library,<python><sockets><runtime-error>,1,3,,,,CC BY-SA 4.0
+64841064,1,,,2020-11-15 03:55:32,,0,44,"<p>I have a loop inside of a loop that won't work right. The loop is not working is the second loop.</p>
+<pre><code>inventory = ['Starry Night', 'Mona Lisa', 'The Nights Watch']
+shopping_cart = []
+
+def add_to_cart(shopping_cart, inventory):
+
+    item_to_buy = ''
+    want_to_purchase_today = False
+    while not len(inventory) == 0 or want_to_purchase_today is True:
+        item_to_buy = input('What would you like to buy? ')
+        item_to_buy = item_to_buy.title()
+        while item_to_buy not in inventory:
+            print('That is not a valid product.')
+            item_to_buy = input('What would you like to buy?')
+            item_to_buy = item_to_buy.title()
+
+        inventory.remove(item_to_buy)
+        shopping_cart.append(item_to_buy)
+
+        print('Current Shopping Cart:', shopping_cart)
+        print('Our Current Stock:', inventory)
+
+        want_to_purchase_today = input('Would you like to buy anything else? Y or N ')
+        want_to_purchase_today = want_to_purchase_today.lower()
+        while want_to_purchase_today is True:
+            if want_to_purchase_today == 'y':
+                return True
+            elif want_to_purchase_today == 'n':
+                return False
+            else:
+                print('That is not a valid choice.')
+                print('Please enter y or n.')
+                want_to_purchase_today = input('Would you like to buy anything else? Y or N ')
+                want_to_purchase_today = want_to_purchase_today.lower()
+
+add_to_cart(shopping_cart, inventory)
+</code></pre>
+<p>This is what I have so far for this function. No matter what I put in when prompted for <code>want_to_purchase_today</code> it will always go back to the start of the function. I will type y, n, or anything and it will go back to the first <code>item_to_buy</code>. I've tried changing the boolean and tried doing the loop without a boolean. I also tried putting the whole thing in it's own function. I just can't figure it out.</p>
+",14640677.0,,7631480.0,,2020-11-15 04:43:19,2020-11-15 05:05:44,Python loop won't break properly,<python>,2,1,,,,CC BY-SA 4.0
+64841050,1,,,2020-11-15 03:51:41,,-1,30,"<p>I have a datetime string and, I want to separate the hour format from the minute format and then print both of them on a separate line.
+Here is the code:</p>
+<pre><code>import re
+from datetime import datetime
+ct = datetime.now().strftime(&quot;%H:%M&quot;)
+time = &quot;10:30&quot;
+minus = datetime.strptime(time,&quot;%H:%M&quot;) - datetime.strptime(ct,&quot;%H:%M&quot;)
+minus = datetime.strptime(str(minus),&quot;%H:%M:%S&quot;
+                                     &quot;&quot;).strftime(&quot;%H:%M&quot;)
+# print(minus)
+regex2 = re.compile(r'(\d)+:(\d)+')
+match = regex2.search(minus)
+print(match.group(0))
+</code></pre>
+<p>If the variable <em>minus</em> gives an output: 01:22
+Then I want it 01 and 22 to be printed on different lines.</p>
+<p>Output Should be like:</p>
+<p>01</p>
+<p>22</p>
+",13899155.0,,,,,2020-11-15 04:39:06,How to separate strings using regex?,<python><regex><string><datetime>,3,3,,,,CC BY-SA 4.0
+64841040,1,,,2020-11-15 03:49:23,,0,12,"<p>I am returning with a invalid syntax error for lcs(0,0) when I call my lcs function. Anyone has any idea why its creating this error? Code:</p>
+<pre><code>def lcs(i, j):
+    a = ['a','b','c','d','g','']
+    b = ['b', 'a', 'd','']
+    n = 0
+    print(n)
+
+    if a[i] == '' or b[i] == '':
+        return 0
+    elif a[i] == b[j]:
+        n += 1
+        return 1 + lcs(i+1, j+1)
+    else:
+       return max(lcs(i+1, j), lcs(i, j+1)
+
+lcs(0,0)
+</code></pre>
+",12329818.0,,,,,2020-11-15 03:49:23,Function calls in python,<python-3.x>,0,3,,,,CC BY-SA 4.0
+64841034,1,,,2020-11-15 03:48:42,,0,8,"<p><strong>Introduction:</strong> I have written a code to give me a set of numbers in '36 by q' format ( 1&lt;= q &lt;= 36), subject to following conditions:</p>
+<ol>
+<li>Each row must use numbers from 1 to 36.</li>
+<li>No number must repeat itself in a coloumn.</li>
+</ol>
+<p><strong>Method:</strong> The first row is generated randomly. Each number in the coming row is checked for the above conditions. If a number fails to satisfy one of the given conditions, it doesn't get picked again fot that specific place in that specific row. If it runs out of acceptable values, it starts over again.</p>
+<p><strong>Problem:</strong>
+Unlike for low q values (say 15 which takes less than a second to compute), the main objective is q=36. It has been more than 24hrs since it strated to run for q=36 on my PC.</p>
+<p><strong>Questions:</strong></p>
+<ol>
+<li><p>Can I predict the time required by it using the data I have from lower q values?  How?</p>
+</li>
+<li><p>Is there any better algorithm to perform this in less time?</p>
+</li>
+<li><p>How can I calculate the average number of cycles it requires?( Using combinatorics or otherwise).</p>
+</li>
+</ol>
+",12307988.0,,,,,2020-11-15 03:48:42,"Question(s) regarding computational intensity, prediction of time required to produce a result",<python-3.x><algorithm><time><computation>,0,0,,,,CC BY-SA 4.0
+64841013,1,,,2020-11-15 03:44:20,,0,13,"<p>I have updated spyder.</p>
+<p>PySide2 = 5.15.0 and python3.8.3</p>
+<p>I tried to execute a module importing <code>QtWebEngineWidgets</code> , <code>QWebEngine</code>.</p>
+<p>But I have this error.</p>
+<pre><code>ERROR:extension_system_qt.cpp(122)] Failed to parse extension manifest.
+</code></pre>
+<p>What should I do?</p>
+",6986533.0,,6622587.0,,2020-11-15 03:47:27,2020-11-15 03:47:27,ERROR:extension_system_qt.cpp(122)] Failed to parse extension manifest,<python><pyside2><qtwebengine>,1,0,,,,CC BY-SA 4.0
+64841010,1,,,2020-11-15 03:43:42,,0,10,"<p>I need to display these two plots exactly how they are but side by side on one output. If I run these codes on the same cell, only the last plot will print. How do I get them both to print side by side?</p>
+<pre><code>import math
+import collections
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as pp
+
+%matplotlib inline
+</code></pre>
+<pre><code>pp.figure(figsize=(9,9))
+
+for i, name in enumerate(allyears_indexed):
+    pp.subplot(5,2,i+1)
+
+    pp.plot(allyears_indexed.loc['M', &quot;Mark&quot;], label='M')
+    pp.plot(allyears_indexed.loc['F', &quot;Mark&quot;], label='F')
+    pp.legend()
+    pp.title('Mark')
+    
+pp.tight_layout()
+</code></pre>
+<pre><code>pp.figure(figsize=(9,9))
+
+for i, name in enumerate(allyears_indexed):
+    pp.subplot(5,2,i+1)
+    
+    pp.plot(allyears_indexed.loc['F', &quot;Rachel&quot;], label='F')
+    pp.plot(allyears_indexed.loc['M', &quot;Rachel&quot;], label='M')
+    pp.legend()
+    pp.title('Rachel')
+
+pp.tight_layout()
+</code></pre>
+",14324183.0,,,,,2020-11-15 03:43:42,How do I display two plots in python to display them side by side?,<python>,0,1,,,,CC BY-SA 4.0
+64841002,1,,,2020-11-15 03:43:01,,2,17,"<p>I want to make a script in python that interacts with a webpage that has quite a lot of javascript in it (it's a webpage that computes a bunch of physics stuff).</p>
+<p>I don't want my code to break if the page formatting changes and I want it to run offline so I would prefer my script to run on a local html copy of the page I got (all the JS code is accessible in the HTML source, there is no call to an external server). I wanted to use the requests library to do it, but it only works with URLs. Is there any library to do this? Note that I want to interact with the HTML (input values and look at the outputs etc..), I know that I can parse the file but that's not what I'm asking. I'm also totally new to web bots or anything related.</p>
+<p>Right now I can open my .html version of the page offline with chrome and interact with it, so there has to be a way to automate this somehow. I'm also not against using something else than python if there is a better library for this in another language.</p>
+",13542760.0,,,,,2020-11-15 04:58:13,Interact with local HTML file with python,<python><html><web><web-scraping><python-requests>,1,1,,,,CC BY-SA 4.0
+64840996,1,,,2020-11-15 03:41:46,,0,22,"<p>Say I assign variable</p>
+<pre><code>x = '\\dnassmb1\biloadfiles_dev\Workday'
+print(x)
+</code></pre>
+<p>Output:</p>
+<pre><code>'\\dnassmb1\x08iloadfiles_dev\\Workday'
+</code></pre>
+<p>I would like to know why it's changing to &quot;x08..&quot; specifically and how to avoid that automatic change and use string as it is. Thank you!</p>
+",11371807.0,,,,,2020-11-15 04:02:02,Why is the string automatically being changed? Is it because of backslash \ in the string?,<python><string><printing>,2,2,,2020-11-15 04:08:52,,CC BY-SA 4.0
+64840993,1,,,2020-11-15 03:40:53,,0,8,"<pre><code>import pyglet
+
+window = pyglet.window.Window()
+label = pyglet.text.Label('Hello, world',
+                          font_name = 'Times New Roman',
+                          font_size = 36,
+                          x = window.width // 2, y = window.height // 2,
+                          anchor_x = 'center', anchor_y = 'center')
+
+@window.event
+def on_draw():
+    window.clear()
+    label.draw()
+
+pyglet.app.run()
+</code></pre>
+<p>This code was from the pyglet tutorial at <a href=""https://pyglet.readthedocs.io/en/pyglet-1.2-maintenance/programming_guide/quickstart.html"" rel=""nofollow noreferrer"">https://pyglet.readthedocs.io/en/pyglet-1.2-maintenance/programming_guide/quickstart.html</a>. When I run it, it doesn't draw the label but instead shows some weirdly generated strands of lines and dots:</p>
+<p><a href=""https://i.stack.imgur.com/KRqVM.png"" rel=""nofollow noreferrer""><img src=""https://i.stack.imgur.com/KRqVM.png"" alt=""Output of the code"" /></a></p>
+<p>I've tried with different texts and also tried to remove the font declaration, but it always results in something similar in the picture. I use Windows 10. Any clue as of why this happens? Thanks in advance.</p>
+",13232340.0,,,,,2020-11-15 03:40:53,Pyglet hello world example only shows randomly generated dashes of lines,<python><pyglet>,0,0,,,,CC BY-SA 4.0
+64840992,1,64841089.0,,2020-11-15 03:40:43,,0,25,"<p>What my script is doing now is adding elements to a list. For example, if the user types &quot;JO&quot;, I will add &quot;John&quot; to the list. What I want to do now is that, if the user types &quot;2 JO&quot;, I add two elements to the list: &quot;John&quot; and &quot;John&quot;.
+This is how the database looks like now:</p>
+<p><a href=""https://i.stack.imgur.com/LsBSU.png"" rel=""nofollow noreferrer"">Sample database copy.png</a></p>
+<p>This is the code now:</p>
+<pre><code>import pandas
+data = pandas.read_excel(&quot;Sample database copy.xlsx&quot;)
+name = dict(zip(data[&quot;Abbreviation&quot;],data[&quot;Name&quot;]))
+list1 = []
+incoming_msg = input(Please type what you want to add: )
+list1.append(name[incoming_msg])
+</code></pre>
+<p>I need to do it all from the same input, I cannot ask separately for quantity and abbreviation. I wanted to know if there is any library that can do this somehow easily because I am a beginner coder. If there is no library but you have any idea how I could solve it, it would be awesome as well.</p>
+<p>Thank you so much in advance!</p>
+",14622792.0,,14622792.0,,2020-11-15 03:48:14,2020-11-15 04:02:39,How can I add two or more elements to a list from a single input in Python?,<python><python-3.x><pandas><list>,1,2,,,,CC BY-SA 4.0
+64840991,1,64841049.0,,2020-11-15 03:40:33,,2,28,"<p>What is the shortest code to repeat numpy <code>array([x,y,z])</code> and make <code>array([x,y,z], [x,y,z], [x,y,z], ...)</code> which to make the code like shown below:</p>
+<pre><code>import numpy as np
+p = np.array([1, 2, 3])
+n = 10
+p_n = np.tile(p, n).reshape(n, 3)
+</code></pre>
+<p>output of the code:</p>
+<pre><code>array([[1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3]])
+</code></pre>
+",6788640.0,,6788640.0,,2020-11-15 04:25:23,2020-11-15 05:03:21,"Shortest code to repeat array([x,y,z]) in Python",<python><numpy>,3,0,,,,CC BY-SA 4.0
+64840989,1,,,2020-11-15 03:40:16,,0,7,"<p>So I'm trying to make a check-in command which only works in a specific server due to how the channels are organized. Is there a way to check where the command is being run and block it if it isn't from this specific guild/server?</p>
+<p>My command im trying to lock to a specific guild.</p>
+<pre class=""lang-py prettyprint-override""><code>@commands.command()
+#something here to check guild?
+async def checkin(self, ctx):
+    category = discord.utils.get(ctx.guild.categories, id=catID)
+    checkinem = discord.Embed(title='Realms Channels')
+    
+    for channel in category.channels: # or text_channels or voice_channels
+        realm, emoji = channel.name.split('-')
+        checkinem.add_field(name=realm, value=emoji, inline=False)
+        
+    checkinmsg = await ctx.send(embed=checkinem)
+    for channel in category.channels: 
+      realm, emoji = channel.name.split('-')
+      await checkinmsg.add_reaction(emoji=emoji)
+
+</code></pre>
+<p>Any help would be greatly appreciated, thanks once again!</p>
+",13486388.0,,,,,2020-11-15 03:40:16,Discord.py Making a server only command,<python><discord.py>,0,1,,,,CC BY-SA 4.0
+64840984,1,,,2020-11-15 03:39:26,,2,12,"<p>I'm looking at <a href=""https://math.stackexchange.com/a/1445927/822508"">this</a> post, over on Mathematics SE. I'll summarize here:</p>
+<hr />
+<p>A signal with a known velocity, <code>c</code> is emitted by some source. We're given the coordinates of four receivers in three dimensions (<code>[x_i, y_i, z_i]</code>), the time difference of arrival (<code>dT</code>, a.k.a the 'time offset'), and the velocity of the signal, <code>c</code>.</p>
+<p>The equation for multilateration is of the form:</p>
+<p><code>sqrt( (x-x_i)^2 + (y-y_i)^2 + (z-z_i)^2 ) - c * dT = d_i</code></p>
+<p>Where <code>[x,y,z]</code> are the coordinates of the source, which we want to determine.</p>
+<p><strong>The answerer describes the following solution:</strong></p>
+<p>&quot;To illustrate the method in it's simplest form lets take the 2D problem without the timing offset as an example. We have the equations:&quot;</p>
+<p><code>sqrt( (x-x_1)^2 + (y-y_1)^2 ) = d_1</code></p>
+<p><code>sqrt( (x-x_2)^2 + (y-y_2)^2 ) = d_2</code></p>
+<p>Where <code>x</code> and <code>y</code> are the unknowns. To solve this using Newton's method, we rephrase it in the form <code>F(x,y) = 0</code> for some function <code>F</code>. A natural choice to take is <code>F(x,y) = (f_1(x,y), f_2(x,y))</code> where:</p>
+<p><code>f_1(x,y) = sqrt( ( x-x_1)^2 + (y-y_1)^2 ) - d_1</code></p>
+<p><code>f_2(x,y) = sqrt( ( x-x_2)^2 + (y-y_2)^2 ) - d_2</code></p>
+<p>...we can find a new solution by iterating the recurrence:</p>
+<p><code>J(r_n)(r_n+1 - r_n) = -F(r_n)</code></p>
+<p>where <code>J</code> is the Jacobian matrix and <code>r_n = (x_n, y_n)</code>. As opposed to Newton's method in 1D we need to solve a linear equation system <code>Ax = b</code> at every step to find the new solution.</p>
+<p><strong>And provides the following code:</strong></p>
+<pre class=""lang-js prettyprint-override""><code>(* Desired solution *)
+xx = 2.4; yy = 4.2;
+
+(* Constants *)
+x1 = 0.5; x2 = 2.4; y1 = 0; y2 = -1.3;
+d1 = Sqrt[(xx - x1)^2 + (yy - y1)^2];
+d2 = Sqrt[(xx - x2)^2 + (yy - y2)^2];
+
+(* F = 0 function *)
+f1[x_, y_] = Sqrt[(x - x1)^2 + (y - y1)^2] - d1;
+f2[x_, y_] = Sqrt[(x - x2)^2 + (y - y2)^2] - d2;
+
+(* Jacobian matrix *)
+J[x_, y_] = {{D[f1[x, y], x], D[f1[x, y], y]}, {D[f2[x, y], x], D[f2[x, y], y]}};
+
+(* Random first guess *)
+rn = {-3.7, 8.9};
+Do[
+  (* Itterate *)
+  rn += -Inverse[J[rn[[1]], rn[[2]]]].{f1[rn[[1]], rn[[2]]], f2[rn[[1]], rn[[2]]]};
+  Print[&quot;Step &quot;,i,&quot; Solution = &quot;, rn];
+  , {i, 1, 10}];
+</code></pre>
+<hr />
+<p>I'd like now to expand this to a three-dimensional solution, however I'm not sure precisely how that would differ from the solution offered above. I'd also like to do so in <code>Python</code>. I'm familiar with <code>Numpy</code> and <code>SciPy</code>, but I don't quite follow what's going on in this <code>Mathematica</code> code. I feel that everything up to <code>(* Jacobian Matrix *)</code> is fairly self-explanatory, but most of what comes after is Latin to me.</p>
+<p>I'd like to understand better exactly what steps are being taken here, and how this would expand to a solution in three dimensions, given four observers.</p>
+",14073182.0,,,,,2020-11-15 03:39:26,Porting this Mathematica Newton-Raphson code to Python/ScyPi/NumPy,<python><wolfram-mathematica><mathematical-optimization><newtons-method>,0,0,,,,CC BY-SA 4.0
+64840981,1,,,2020-11-15 03:38:48,,0,10,"<p>I'm hitting the CPU limit on my vps for my discord bot, I'm wondering if postgresql benefits to having multiple cores? Do I need to be using multiple connections?</p>
+<p>I am using <code>Python 3.7</code> and asyncpg</p>
+",13314450.0,,14091877.0,,2020-11-15 03:47:11,2020-11-15 03:47:11,Am I supposed to use multiple connections or one connection in postgresql python,<python><asyncpg>,0,0,,,,CC BY-SA 4.0
+64840975,1,,,2020-11-15 03:37:14,,0,17,"<p>I have a task to scrape item name, price, and restaurant information (name, merchant id, location) using python from <a href=""https://gofood.co.id/jakarta/restaurants?page=1"" rel=""nofollow noreferrer"">this page</a>.</p>
+<p>the hint is :</p>
+<ul>
+<li>List of merchants can be found inside: [​'props'​][​'initialState'​][​'/jakarta/restaurants'​][​'data'​]</li>
+<li>Restaurant page data can be found inside: [​'props'​][​'initialProps'​][​'pageProps'​][​'data'​]</li>
+<li>SKU and price are scrapped from
+<a href=""https://gofood.co.id/jakarta/restaurant/%E2%80%8B"" rel=""nofollow noreferrer"">https://gofood.co.id/jakarta/restaurant/​</a> [resto-name-with-dash]​ - ​ [id]</li>
+</ul>
+<p>Until now, I just try to scrape from one urlpage and don't have any idea what to do with the hint.
+here's my current code:</p>
+<pre><code>import requests
+import json
+from bs4 import BeautifulSoup
+import re
+
+URL = 'https://gofood.co.id/jakarta/restaurant/sabana-fried-chicken-kuningan-53015539-f4de-442f-b179-de66974e0f02'
+page = requests.get(URL)
+soup = BeautifulSoup(page.content, 'html.parser')
+results = soup.find(id=&quot;0b2d9e35-3426-4cc7-9861-3867183840c5&quot;)
+elems = results.find_all('div', class_='jsx-1370946080 text-container')
+
+for elem in elems:
+    item_name = elem.find('p', class_=&quot;jsx-1370946080&quot;)
+    price = elem.find('p', class_=&quot;jsx-1370946080 bold-texts font-maison-bold&quot;)
+    if None in (item_name, price):
+        continue
+    print(item_name.text.strip())
+    print(price.text.strip())
+    print()
+</code></pre>
+<p>and my result so far:</p>
+<pre><code>Dada Ayam
+13,000
+
+Paha Atas
+13,000
+
+Sayap Crispy
+9,600
+
+Paha Bawah
+10,000
+
+Kulit Crispy
+7,000 9,000
+
+Nasi
+6,500
+
+Paket Nasi Sayap Crispy
+15,850 18,500
+
+Paket Nasi Paha Bawah
+16,000 18,500
+
+Paket Nasi Dada Crispy
+19,000
+
+Paket Nasi Paha Atas
+19,000
+</code></pre>
+<p>I quite noob and manage to inspect for id/class manually. Can you help me what I have to do with the hint? I want to store at least 30 restaurant in pandas format.</p>
+",14640623.0,,,,,2020-11-15 03:37:14,Python web scraping homework,<python><web-scraping>,0,0,,,,CC BY-SA 4.0
+64840960,1,,,2020-11-15 03:34:00,,0,23,"<p>I am trying to scrape pages from a website, but using this code I get an error:</p>
+<pre><code>AttributeError: 'NoneType' object has no attribute 'get_text'
+</code></pre>
+<p>This error is associated to allin in the code below:</p>
+<pre><code>def main(req, num):
+    r = req.get(&quot;https://voxnews.info/cronaca/page/{}/&quot;.format(num))
+    soup = BeautifulSoup(r.content, 'html.parser')
+    res = [(x.time.text, x.h3.a.text, x.select_one(&quot;span.cat-links&quot;).get_text(strip=True), x.p.get_text(strip=True))for x in soup.select(&quot;div.site-content&quot;)] # the error seems to be caused by this line of code
+    return res
+
+
+with ThreadPoolExecutor(max_workers=10) as executor:
+    with requests.Session() as req:
+        fs = [executor.submit(main, req, num) for num in range(1, 2)]
+        allin = []
+        for f in fs:
+            allin.extend(f.result())
+        df = pd.DataFrame.from_records(
+            allin, columns=[&quot;D&quot;, &quot;T&quot;, &quot;TG&quot;, &quot;C&quot;])
+</code></pre>
+<p>I have checked the code and it seems ok to me. However, since I found this code structure online, it is possible that I have missed some steps necessary to scrape data form this particular website. Looking for possible solutions on the web, I have found the the error might be caused by a missing text.strip. I tried it but it has not fixed my issue.
+<a href=""https://stackoverflow.com/questions/39982524/python-nonetype-object-has-no-attribute-get-text"">Python, &#39;NoneType&#39; object has no attribute &#39;get_text&#39;</a></p>
+<p>I would appreciate if you can tell me if you get the same error and spot anything wrong in the code above.</p>
+",14289862.0,,14289862.0,,2020-11-15 03:41:31,2020-11-15 04:16:21,'NoneType' object has no attribute 'get_text',<python><web-scraping><beautifulsoup>,1,10,,,,CC BY-SA 4.0
+64840926,1,,,2020-11-15 03:28:11,,1,36,"<p>so i'm doing the dna problem for cs50 wherein i have to count the number of times a STR repeats in a dna sequence. i had an idea on how to solve the problem so i took one of the data and ran my code but the problem is that the program doesn't end and keeps running i think it has been about 10 minutes now from when i started the program and it still like this. here's the code:</p>
+<pre><code>text=&quot;AAGGTAAGTTTAGAATATAAAAGGTGAGTTAAATAGAATAGGTTAAAATTAAAGGAGATCAGATCAGATCAGATCTATCTATCTATCTATCTATCAGAAAAGAGTAAATAGTTAAAGAGTAAGATATTGAATTAATGGAAAATATTGTTGGGGAAAGGAGGGATAGAAGG&quot;
+length=len(text)
+AGAT=0
+tmp=0
+for i in range(length):
+    while text[i]==&quot;A&quot; and text[i+1]==&quot;G&quot; and text[i+2]==&quot;A&quot; and text[i+3]==&quot;T&quot;:
+        tmp+=1
+    if tmp&gt;AGAT:
+        AGAT=tmp
+    else:
+        AGAT=AGAT
+print(&quot;done&quot;)
+</code></pre>
+",13980620.0,,,,,2020-11-15 03:52:54,python program runtime taking so long/won't end,<python>,2,4,,,,CC BY-SA 4.0
+64840905,1,,,2020-11-15 03:23:31,,-1,9,"<p>I'm making a Post and Comment model. I created and Post and Comment model and it looks ok. I can add post and also comment to any particular post. But getting trouble when I'm trying to delete the comment after several attempts I am getting an error from <code>test_func</code>.</p>
+<p>Here is the views.py</p>
+<pre><code>class PostCommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = 'blog/postcomment_confirm_delete.html'  # &lt;app&gt;/&lt;model&gt;_&lt;viewtype&gt;.html
+
+    def test_func(self):
+        comment = self.get_object()  &lt;------------- Error showing from here
+        if self.request.user == comment.user:
+            return True
+        return False
+
+    def form_invalid(self, form):
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('blog:post-detail', kwargs=dict(slug=self.kwargs['slug']))
+</code></pre>
+<p>Here is the template:</p>
+<pre><code>            {% for comment in comments %}
+                &lt;ul class=&quot;list-unstyled&quot;&gt;
+                  &lt;li class=&quot;media&quot;&gt;
+                    &lt;img class=&quot;rounded-circle article-img&quot; src=&quot;{{ comment.post.author.profile.image.url }}&quot;&gt;
+                      &lt;div class=&quot;media-body&quot;&gt;
+                      &lt;h5 class=&quot;mt-0 mb-1&quot;&gt;{{comment.user| capfirst}}&lt;small class=&quot;text-muted&quot;&gt;- {{ comment.created}}&lt;/small&gt; &lt;/h5&gt;
+                        &lt;hr class=&quot;solid mt-0&quot;&gt;
+                        {{ comment.content}}
+                      &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+               {% if comment.user == user %}
+                  &lt;div&gt;
+                    &lt;a class=&quot;btn btn-secondary btn-sm mt-1 mb-1&quot; href=&quot;{% url 'blog:post-commentu' post.slug %}&quot;&gt;Update&lt;/a&gt;
+                    &lt;a class=&quot;btn btn-danger btn-sm mt-1 mb-1&quot; href=&quot;{% url 'blog:post-commentd' post.slug %}&quot;&gt;Delete&lt;/a&gt;
+                  &lt;/div&gt;
+                {% endif %}
+            {% endfor %}
+</code></pre>
+<p>Here is the url</p>
+<pre><code>    path('blog/&lt;slug:slug&gt;/delete_comment/',
+         PostCommentDeleteView.as_view(), name='post-commentd'),
+</code></pre>
+<p>Here is the models.py</p>
+<pre><code>class Post(models.Model):
+    title = models.CharField(max_length=100, unique=True)
+    content = RichTextUploadingField(null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
+    slug = models.SlugField(blank=True, null=True, max_length=120)
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField(max_length=300, validators=[validate_comment_text])
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now=True)
+</code></pre>
+",13176726.0,,,,,2020-11-15 03:23:31,How to Solve a FieldError- Cannot resolve keyword 'slug' into field,<python><django>,0,3,,,,CC BY-SA 4.0
+64840898,1,,,2020-11-15 03:22:01,,0,7,"<p>I've designed a neural network with a custom layer in TensorFlow. Firstly, I used <code>__call__()</code> to define the forward pass and then I called the <code>model.summary()</code>. This gave me following error</p>
+<pre><code>ValueError: This model has not yet been built. Build the model first by calling `build()` or calling `fit()` with some data, or specify an `input_shape` argument in the first layer(s) for automatic build.  
+</code></pre>
+<p>However, when I replaced it with <code>call()</code>, I worked just fine.</p>
+<p>Q: I want to understand what is going on under the hood.</p>
+",14337775.0,,,,,2020-11-15 03:22:01,TensorFlow: Difference between __call__() and call() when designing custom layers?,<python><tensorflow><machine-learning><deep-learning><neural-network>,0,0,,,,CC BY-SA 4.0
+64840883,1,,,2020-11-15 03:15:46,,0,15,"<p>I'm running a Flask application (with some bits of Django ORM) on Elastic Beanstalk (code link: <a href=""https://github.com/onnela-lab/beiwe-backend"" rel=""nofollow noreferrer"">https://github.com/onnela-lab/beiwe-backend</a>). However, I'm getting constant notifications from Elastic Beanstalk about 5xx failures (~5-25% failures). Looking at the logs (/var/logs/httpd/error_log), I see the following errors:</p>
+<p>Error 1:</p>
+<pre><code>[Fri Nov 13 13:58:55.487007 2020] [:error] [pid 14630] [remote {load_balancer_ip_address:port1}] mod_wsgi (pid=14630): Exception occurred processing WSGI script '/opt/python/current/app/wsgi.py'.
+[Fri Nov 13 13:58:55.487070 2020] [:error] [pid 14630] [remote {load_balancer_ip_address:port1}] OSError: failed to write data
+</code></pre>
+<p>Error 2:</p>
+<pre><code>[Fri Nov 13 13:59:55.486449 2020] [:error] [pid 17765] (70008)Partial results are valid but processing is incomplete: [client {load_balancer_ip_address:port2}] mod_wsgi (pid=17765): Unable to get bucket brigade for request
+</code></pre>
+<p>Doing a quick grep -c (result: 5418) for each of these confirms that they're likely related issues, despite no correlation in PIDs and different LB ports.</p>
+<p>I did some research on Stack Overflow and found the following related questions:</p>
+<p><a href=""https://stackoverflow.com/questions/25758529/django-oserror-failed-to-write-data"">Django OSError: failed to write data</a></p>
+<p><a href=""https://stackoverflow.com/questions/50513770/apache-mod-wsgi-flask-app-unable-to-get-bucket-brigade-for-request-error"">Apache + mod_wsgi + flask app: &quot;Unable to get bucket brigade for request&quot; error in logs</a></p>
+<p>Summary: It's possible that clients with spotty connections are causing this issue due to an interrupted connection or that something is killing the Apache child worker process.</p>
+<p>Most of the clients calling this API are Android and iOS clients uploading IoT data, so one hypothesis I have is that clients are attempting to upload a large amount of data and are timing out. However, it's frustrating that there isn't a more descriptive stack trace other than 'OSError: Failed to write data'.</p>
+<p>I'm currently in the process of figuring out how to increase the timeout on my servers (and scaling up to avoid any performance issues) to see if that hypothesis holds.</p>
+<p>But rather than trial and error, is there a better strategy for root causing the issue here?</p>
+<p>Specifically:</p>
+<ol>
+<li>What other log files should I be looking into?</li>
+<li>How would I go about printing the full stack trace to further root cause this?</li>
+</ol>
+<p>I'm relatively new at Flask/Django/mod_wsgi, so it's a possibility that I'm missing something really obvious here.</p>
+<p>EDIT: Adding my wsgi.conf here as well:</p>
+<pre><code>WSGISocketPrefix run/wsgi
+WSGIRestrictEmbedded On
+
+&lt;VirtualHost *:80&gt;
+
+Alias /static/ /opt/python/current/app/frontend/static/
+&lt;Directory /opt/python/current/app/frontend/static/&gt;
+Order allow,deny
+Allow from all
+&lt;/Directory&gt;
+
+
+WSGIScriptAlias / /opt/python/current/app/wsgi.py
+
+
+&lt;Directory /opt/python/current/app/&gt;
+  Require all granted
+&lt;/Directory&gt;
+
+WSGIDaemonProcess wsgi processes=2 threads=20 display-name=%{GROUP} \
+  python-home=/opt/python/run/venv/ \
+  python-path=/opt/python/current/app user=wsgi group=wsgi \
+  home=/opt/python/current/app
+WSGIProcessGroup wsgi
+&lt;/VirtualHost&gt;
+
+LogFormat &quot;%h (%{X-Forwarded-For}i) %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined
+
+WSGIApplicationGroup %{GLOBAL}
+</code></pre>
+",3727454.0,,400617.0,,2020-11-15 03:28:13,2020-11-15 03:28:13,How do I go about debugging 'OSError: Failed to write data' on my Flask server?,<python><flask><mod-wsgi>,0,0,,,,CC BY-SA 4.0
+64840878,1,,,2020-11-15 03:14:10,,0,11,"<p>I'm trying to create an algorithm using python and OpenCV to classify a portion of cotton with some pre-defined tones of white. I'm new at computer vision and struggling to make it work.</p>
+<p>I read the CIE L.A.B is the best color space because it isn't affected by hardware (like camera or monitor), so I think it's the best option to compare tones of white (please correct me if I wrong)</p>
+<p>For the first time, I used some squared images of the white tones and calculated the alpha against the pre-determined tone of white to classify it according to classification of whiteness. My problem started when I started to use a real cotton's image.</p>
+<p>I applied a mask to filter the range of white tones I want to classify, but the rest of the image (what isn't caught by the mask) turns black pixels, and those black pixels interferes on my color check.</p>
+<p>I tried many things: ignore the black pixels, reshape the image (turn the cotton image to spread all the image's area) without any success.I tried too calculate the center of the image, or draw a square to get some area of cotton's image to cut and analise just it,  but I realized I need all the cotton surface to be analyzed.</p>
+<p>I would like to know if someone have an idea how to process the cotton image (entirely) ignoring, or removing the black pixels.</p>
+<p>here the resulting image of my script:</p>
+<p><a href=""https://i.stack.imgur.com/4MKXw.png"" rel=""nofollow noreferrer"">result of a mask and the contour detected</a></p>
+<p>and above my script:</p>
+<pre><code>import cv2
+import numpy as np
+import numpy.ma as ma
+import argparse
+import colour
+
+def getContours(img):
+    contours, Hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+    contours_poly = [None]*len(contours)
+    boundRect = [None]*len(contours)
+    centers = [None]*len(contours)
+    radius = [None]*len(contours)
+
+    for i, cnt in enumerate(contours):
+
+        area = cv2.contourArea(cnt)
+
+        if area&gt;30:
+            contours_poly[i] = cv2.approxPolyDP(cnt, 3, True)
+            boundRect[i] = cv2.boundingRect(contours_poly[i])
+            centers[i], radius[i] = cv2.minEnclosingCircle(contours_poly[i])
+
+            # print(area)
+
+            perc = 0
+
+    
+            cv2.drawContours(imgContour, cnt, -1, (255,255,255),3)
+            peri = cv2.arcLength(cnt, True)
+            # approx = cv2.approxPolyDP(cnt, 0.02*peri,True) #retorna os cantos da forma
+            approx = cv2.approxPolyDP(cnt, 0.02*peri,True) #retorna os cantos da forma
+            x,y,w,h = cv2.boundingRect(approx)
+            #cv2.rectangle(imgContour, (x,y),(x+w,y+h),(0,255,0),2)
+            #cv2.circle(imgContour, (int(centers[i][0]), int(centers[i][1])), int(radius[i]-(radius[i]*0.5)), (255,0,0), 2)
+            pt1 = (int(boundRect[i][0]), int(boundRect[i][1]))
+            pt2 = (int(boundRect[i][0]+boundRect[i][2]), int(boundRect[i][1]+boundRect[i][3]))
+
+            # pt1 = (int(pt1[0] + pt1[0]*perc), int(pt1[1] + pt1[1]*perc))
+            # pt2 = (int(pt2[0] - pt2[0]*perc), int(pt2[1] - pt2[1]*perc))
+
+            # compute the center of the contour
+            M = cv2.moments(cnt)
+            cX = int(M[&quot;m10&quot;] / M[&quot;m00&quot;])
+            cY = int(M[&quot;m01&quot;] / M[&quot;m00&quot;])
+
+            # draw the contour and center of the shape on the image
+            cv2.drawContours(imgContour, [cnt], -1, (0, 255, 0), 2)
+            radius = int(area - (area*0.6))
+            cv2.circle(imgContour, (cX, cY), radius, (0, 0, 255), 2)
+
+            cv2.rectangle(imgContour, pt1, pt2, (0,0,255), 2)
+
+#----------- Leitura dos parametros
+# ap = argparse.ArgumentParser()
+# ap.add_argument(&quot;-i&quot;, &quot;--image&quot;, required = True, help = &quot;Path to the image&quot;)
+# args = vars(ap.parse_args())
+# colorPath = args[&quot;image&quot;]
+
+colorPath = './resources/amostras/algodao_in-natura_400x300.jpg'
+
+# color_to_check_BGR = cv2.imread('./resources/color-samples/1x1_60-6-100.png')
+# print(color_to_check_BGR)
+# exit()
+
+#----------- Cores pre-definidas
+color_60_0_100_LAB = cv2.cvtColor(np.array([[[255, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_2_100_LAB = cv2.cvtColor(np.array([[[249, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_4_100_LAB = cv2.cvtColor(np.array([[[244, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_6_100_LAB = cv2.cvtColor(np.array([[[239, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_8_100_LAB = cv2.cvtColor(np.array([[[234, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_10_100_LAB = cv2.cvtColor(np.array([[[229, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_12_100_LAB = cv2.cvtColor(np.array([[[224, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_20_100_LAB = cv2.cvtColor(np.array([[[204, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+color_60_24_100_LAB = cv2.cvtColor(np.array([[[193, 255, 255]]]).astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+
+colors = {
+    &quot;WB-60-0-100&quot;: color_60_0_100_LAB,
+    &quot;WB-60-2-100&quot;: color_60_2_100_LAB,
+    &quot;WB-60-4-100&quot;: color_60_4_100_LAB,
+    &quot;WB-60-6-100&quot;: color_60_6_100_LAB,
+    &quot;WB-60-8-100&quot;: color_60_8_100_LAB,
+    &quot;WB-60-10-100&quot;: color_60_10_100_LAB,
+    &quot;WB-60-12-100&quot;: color_60_12_100_LAB,
+    &quot;WB-60-20-100&quot;: color_60_20_100_LAB,
+    &quot;WB-60-24-100&quot;: color_60_24_100_LAB
+}
+
+#----------- leitura do arquivo imagem
+image1_bgr = cv2.imread(colorPath)
+image1_HSV = cv2.cvtColor(image1_bgr, cv2.COLOR_BGR2HSV)
+
+colorFound = {
+    &quot;colorName&quot;: '',
+    &quot;delta&quot;: -1
+}
+
+#----------- máscara para remover o fundo preto
+# cria os arrays para serem usados como limite na máscara
+h_min, h_max, s_min, s_max, v_min, v_max = [0, 179, 0, 255, 78, 255]
+lowerLimit = np.array([h_min,s_min,v_min])
+upperLimit = np.array([h_max,s_max,v_max])
+mask = cv2.inRange(image1_HSV, lowerLimit, upperLimit)
+
+imgResult_BGR = cv2.bitwise_and(image1_bgr, image1_bgr, mask=mask)
+
+imgResult_RGB = cv2.cvtColor(imgResult_BGR, cv2.COLOR_BGR2RGB)
+
+imgContour = imgResult_RGB.copy()
+
+imgBlur = cv2.GaussianBlur(imgResult_RGB, (7,7),1)
+imgCanny = cv2.Canny(imgBlur, 50, 50) # pega os contornos da imagem
+getContours(imgCanny)
+
+cv2.imshow('contours', imgContour)
+cv2.waitKey(0)
+
+exit()
+
+# cv2.imwrite('img_result.jpg', imgResult_BGR) 
+# cv2.imshow('original',image1_bgr)
+# cv2.imshow('mask',mask)
+# cv2.imshow('imgLimpa', imgResult_BGR)
+# cv2.waitKey(0)
+
+image1_lab = cv2.cvtColor(imgResult_BGR.astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+# image1_lab = cv2.cvtColor(mx.astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
+
+#----------- laço para procurar fazer o match por cor no array de cores pré-definidas
+for key in colors:
+    color = colors[key]
+    delta_E_2000 = colour.delta_E(image1_lab, color, method='cie2000')
+    delta = np.mean(delta_E_2000)
+
+    if colorFound[&quot;delta&quot;] == -1 or colorFound[&quot;delta&quot;] &gt; delta :
+        colorFound[&quot;colorName&quot;] = key
+        colorFound[&quot;delta&quot;] = delta
+
+
+print('\n\nA imagem &quot;{}&quot; mais se assemelha da cor &quot;{}&quot; e o delta calculado foi de &quot;{}&quot;'.format(colorPath, colorFound[&quot;colorName&quot;], colorFound[&quot;delta&quot;]))
+
+</code></pre>
+<p>Thanks.</p>
+",11068899.0,,,,,2020-11-15 03:14:10,Opencv classifiyng colors on irregular objects,<python><opencv><machine-learning><computer-vision>,0,0,,,,CC BY-SA 4.0
+64840875,1,,,2020-11-15 03:13:36,,0,11,"<p>I want to create a function that does hypothesis testing. One of the parameter is alpha, given alpha I want to get rejection region (by lookin up z-score table) how can I do this using python?</p>
+<p>for example:
+if I input alpha=0.05 it should return [-1.96, 1.96]</p>
+",10970202.0,,,,,2020-11-15 03:13:36,How to get rejection region given significance level using python,<python><statistics><statistical-test>,0,0,,,,CC BY-SA 4.0
+64840865,1,,,2020-11-15 03:11:44,,-3,25,"<p>I was writing this code for an assignment, it pretty much takes numbers as inputs, ignores the negatives ones and prints out a list of the positive ones, the code itself work perfectly but when I call it to use in another function I get the error &quot;TypeError: 'NoneType' object is not iterable&quot;, I believe it has something to do with append section but I'm am not sure</p>
+<pre><code>def read_postive():
+    number=[]
+    check=0
+    lst=[]
+    while number != check:
+        number = int(input(&quot;Enter a positive number: &quot;))
+        if number &gt; 0:
+            lst.append(number)
+print(&quot;&quot;)  
+print(&quot;List entered: {}&quot;.format(lst))    
+return
+</code></pre>
+",14640605.0,,,,,2020-11-15 03:27:50,Nonetype error when calling function below,<python><python-3.x><list>,0,3,,,,CC BY-SA 4.0
+64840852,1,,,2020-11-15 03:09:00,,-1,19,"<p>I honestly have not ever used pandas before, and it is my first time working on such a project.  the .csv file is a large dataset and with NaN values in it. unfortunately, due to my lack of experience, some things are not really working for me, and I would appreciate a little more clarity of how I should proceed in my case and I keep getting this error:
+ValueError: Found array with 0 sample (s) (shape= (0, 1) while a minimum of 1 is required .</p>
+<p>The code is as follows</p>
+<pre><code>import pandas as pd
+from matplotlib import pyplot as plt
+from sklearn.cluster import KMeans
+
+complete_dataset = pd.read_csv(&quot;311_Call_Center_Service_Requests.csv&quot;)
+complete_dataset = complete_dataset.dropna()
+data = complete_dataset[['A','B']]
+plt.scatter(data['A'],data['B'],s=10)
+plt.show()
+
+model = KMeans(n_clusters = 1, init= 'k=means++', max_iter = 300, n_init = 10,random_state =1)
+
+model.fit(data)
+print(model.labels_)
+data['cluster'] = model.labels_
+plt.scatter(data['A'],data['B'],c=data['cluster'] .astype(float))
+plt.show()
+print(model.cluster_centers_)
+counts = data.groupby(['cluster']).agg(['count'])
+print(counts)
+</code></pre>
+<p>I would appreciate your help on how I should proceed in my case.</p>
+",14554605.0,,,,,2020-11-15 04:57:16,"ValueError: Found array with 0 sample (s) (shape= (0, 1) while a minimum of 1 is required",<python><pandas>,1,1,,,,CC BY-SA 4.0
+64840848,1,,,2020-11-15 03:08:08,,0,6,"<p>If I change the test_size =, accuracy should be changed, right?? Mine is not changing no matter what test size I put. Why??</p>
+<p>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .90, random_state = 12)</p>
+<p>VS</p>
+<p>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .10, random_state = 12)</p>
+<p>I am still getting the same accuracy. WHY???</p>
+",14640598.0,,,,,2020-11-15 03:08:08,"If you change the test size in decision tree, accuracy will be changed?",<python><decision-tree><training-data>,0,1,,,,CC BY-SA 4.0
+64840836,1,,,2020-11-15 03:03:36,,0,18,"<p>I have a table like this :</p>
+<pre class=""lang-py prettyprint-override""><code>import pandas as pd
+values = [0,0,0,2000,0,0,700,0,0,530,1000,820,0,0,200]
+durations = [0,0,0,12,0,0,8,0,0,2,5,15,0,0,3]
+
+ex = pd.DataFrame({'col_to_roll' : values, 'max_duration': durations})
+
+    col_to_roll  max_duration
+0             0             0
+1             0             0
+2             0             0
+3          2000            12
+4             0             0
+5             0             0
+6           700             8
+7             0             0
+8             0             0
+9           530             2
+10         1000             5
+11          820            15
+12            0             0
+13            0             0
+14          200             3
+</code></pre>
+<p>For each row position <code>i</code>, I want to do a rolling sum of <code>col_to_roll</code> between indexes <code>i-7</code> and <code>i-4</code> (both included). The caveat is that I want the values &quot;farther in the past&quot; to be counted more, depending on the column <code>max_duration</code> (which tells for how many timesteps in the future that value can still have an effect).<br />
+There's a higher bound which is the remaining timesteps to be counted (min 1, max 4). So if I'm on row number 7 doing the roll-up sum : the value on row number 1 will be counted <code>min(max_duration[1],4)</code> ,  the value on row number will be counted <code>min(max_duration[2],3)</code> etc ...</p>
+<p>I could do it the brute force way :</p>
+<pre class=""lang-py prettyprint-override""><code>new_col = []
+for i in range(7,len(ex)) : 
+    rolled_val = sum([ex.iloc[j].col_to_roll*min(ex.iloc[j].max_duration , i-j+1-4) \
+                     for j in range(i-7,i-3)])
+    new_col.append(rolled_val)
+ex['rolled_col'] = [np.nan]*7+new_col
+</code></pre>
+<p>Which lands the following results from the example above :</p>
+<pre><code>        col_to_roll  max_duration  rolled_col
+    0             0             0         NaN
+    1             0             0         NaN
+    2             0             0         NaN
+    3          2000            12         NaN
+    4             0             0         NaN
+    5             0             0         NaN
+    6           700             8         NaN
+    7             0             0      2000.0
+    8             0             0      4000.0
+    9           530             2      6000.0
+    10         1000             5      8700.0
+    11          820            15      1400.0
+    12            0             0      2100.0
+    13            0             0      3330.0
+    14          200             3      2060.0
+</code></pre>
+<p>That being said, I'd appreciate a more elegant (and more importantly, more efficient) way to get this result with some pandas magic.</p>
+",8103192.0,,,,,2020-11-15 03:03:36,Rolling sum column while weighting by other column and relative position,<python><pandas><dataframe><rolling-computation>,0,0,,,,CC BY-SA 4.0
+64840830,1,,,2020-11-15 03:02:25,,0,14,"<p>Context:
+I am trying to make a HTTP webserver in python that can use CGI scripts to generate part of a response message. However, I am not sure what format each CGI script's output will be in. Some scripts may contain headers and/or a newline between the header and body, whilst some may not. The way I will handle the output of cgi scripts depends on the answer to the above question.</p>
+",14640565.0,,,,,2020-11-15 03:02:25,Can an empty line be present within the body of a HTTP response message?,<python><http>,0,1,,,,CC BY-SA 4.0
+64840809,1,,,2020-11-15 02:57:44,,-1,39,"<p>I have a function that is currently returning this:</p>
+<p><code>[['o', 'o', 'o', 'o', 'o'], ['o', 'o', 'X', 'o', 'o'], ['o', 'o', 'o', 'o', 'o'], ['o', '_', 'o', 'o', 'o'], ['o', 'o', '_', 'o', 'o']]</code></p>
+<p>when I would instead like it to return:</p>
+<pre><code>[['o', 'o', 'o', 'o', 'o'], 
+ ['o', 'o', 'X', 'o', 'o'], 
+ ['o', 'o', 'o', 'o', 'o'], 
+ ['o', '_', 'o', 'o', 'o'], 
+ ['o', 'o', '_', 'o', 'o']]
+</code></pre>
+<p>Here is the code I have so far:</p>
+<pre><code>def create_box(box):
+    for i in box:
+       line = []
+        for j in box:
+            letters = []
+            for k in j:
+                if k != &quot; &quot;:
+                    letters.append(k)
+            line.append(letters)
+            output = &quot;\n&quot;.join(str(line))
+
+    return line
+</code></pre>
+<p>The input value is from a text file. It is this:</p>
+<pre><code>o o o o o
+o o X o o
+o o o o o
+o _ o o o
+o o _ o o
+</code></pre>
+<p>How would I go about adding a new line in between the sublists?</p>
+",14276370.0,,11472002.0,,2020-11-15 03:10:11,2020-11-15 03:17:35,How to add new lines between sublists?,<python><formatting>,2,7,,,,CC BY-SA 4.0
+64840805,1,,,2020-11-15 02:56:33,,-4,15,"<p>I am having an issue solving this problem, what am I missing?
+&quot;Design a program that asks the user to enter a store’s sales for each day of the week. The
+amounts should be stored in a list. Use a loop to calculate the total sales for the week and
+display the result. Do not allow the user to enter a number less than 0. Hint: Store the days of
+the week in a separate list from the sales values.&quot;
+My code so far;
+<a href=""https://i.stack.imgur.com/Gdwbs.jpg"" rel=""nofollow noreferrer"">syntax error</a></p>
+",14640554.0,,,,,2020-11-15 02:56:33,Looking to resolve a python programming error,<python><syntax>,0,6,,,,CC BY-SA 4.0
+64840803,1,,,2020-11-15 02:56:22,,0,12,"<p>Working with a CSV on Python 3.8 that goes something like:</p>
+<blockquote>
+</blockquote>
+<ul>
+<li><strong>Column_0</strong>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<strong>Column_1</strong>&gt;&gt;&gt;&gt;&gt;&gt;<strong>Column_2</strong>&gt;&gt;&gt;&gt;<strong>Column_3</strong>&gt;&gt;&gt;&gt;&gt;<strong>Column_4</strong></li>
+<li><em>Some_Numbers0</em>&gt;&gt;&gt;<em>Some_String1</em>&gt;&gt;&gt;<em>Some_String2</em>&gt;<em>Some_Numbers3</em>&gt;&gt;Some_Numbers4</li>
+</ul>
+<p>Now, the numbers in Column_3 and Column_4 are what need to be SUM, AVG, and finding the differences of their totals.</p>
+<p>I'm currently stuck on trying to get <strong>both sums to print</strong>. This is how far i've got:</p>
+<pre><code>import csv
+import decimal
+
+with open(&quot;sample.csv&quot;) as myFile:
+    reader = csv.DictReader(myFile)
+    print(sum(float(line[&quot;Column_3&quot;]) for line in reader))
+    print(sum(float(line[&quot;Column_4&quot;]) for line in reader))
+</code></pre>
+<p>Using this, Column_3's total prints but Column_4 I get a &quot;0&quot;. Remove prin line for Column_3, then I get Column_4's total just fine. I've also tried:</p>
+<pre><code>import csv
+import decimal
+
+with open(&quot;sample.csv&quot;) as myFile:
+    total = 0
+    for line in csv.DictReader(myFile):
+        total += int(line[&quot;Column_3&quot;])
+    print(total)
+</code></pre>
+<blockquote>
+<pre><code>but i get
+
+Traceback (most recent call last):
+  File &quot;some file pathway&quot;, line 7, in &lt;module&gt;
+    total += int(line[&quot;Column_3&quot;])
+ValueError: invalid literal for int() with base 10: '1345.67'
+</code></pre>
+</blockquote>
+<p>Which that number represents the first number value of that column_3.</p>
+<p>I'm stumped. Any help is appreciated. I'm sure I'll be returning with questions on finding the AVG and then using their totals to find their differences, all need to print running from the same program but here I am already stuck.</p>
+",14351941.0,,14351941.0,,2020-11-15 03:06:09,2020-11-15 05:05:19,"Finding SUM, AVG, and DIFF of columns using Python with a CSV",<python><csv><average><difference><totals>,1,0,,,,CC BY-SA 4.0
+64840802,1,,,2020-11-15 02:56:15,,0,26,"<p>I'm retrieving data from a Jira database, then saving the data to a Pandas data frame.  Here's my code:</p>
+<pre><code>from jira import JIRA
+import pandas as pd
+
+cert_path = 'C:\\cert.crt'
+
+start_date = '2020-10-01'
+end_date = '2020-10-31'
+
+# three different instances (each with their own schema)
+a_session = JIRA(server='https://jira.myinstance-A.com', options={'verify': cert_path}, kerberos=True)
+
+b_session = JIRA(server='https://jira.myinstance-B.com', options={'verify': cert_path}, kerberos=True)
+
+c_session = JIRA(server='https://jira.myinstance-C.com', options={'verify': cert_path}, kerberos=True)
+
+
+# define queries
+query_1 = 'project = \&quot;Test Project 1\&quot; and issuetype = Incident and resolution = Resolved and updated &gt;= {} and updated &lt;= {}'.format(start_date, end_date)
+
+query_2 = 'project = \&quot;Test Project 2\&quot; and issuetype = Incident and resolution = Resolved and updated &gt;= {} and updated &lt;= {}'.format(start_date, end_date)
+
+query_3 = 'project = \&quot;Test Project 3\&quot; and issuetype = Defect and resolution = Resolved and releasedate &gt;= {} and releasedate &lt;= {}'.format(start_date, end_date)
+
+query_4 = 'project = \&quot;Test Project 4\&quot; and issuetype = Enhancement and resolution = Done and completed &gt;= {} and completed &lt;= {}'.format(start_date, end_date)
+
+
+# fetch all issues from a given session for a given query
+block_size = 100
+block_num = 0
+
+
+def get_all_issues(session, query):
+
+    block_size = 50
+    block_num = 0
+    
+    start = 0
+    all_issues = []
+    while True:
+        issues = session.search_issues(query, start, block_size)
+        if len(issues) == 0:
+            # No more issues
+            break
+        start += len(issues)
+        for issue in issues:
+            all_issues.append(issue)
+
+    issues = pd.DataFrame(issues)
+
+    for issue in all_issues:
+        d = {
+            'key' : issue.key,
+            'type' : issue.fields.type,
+            'creator' : issue.fields.creator,
+            'resolution' : issue.fields.resolution
+             }
+
+        issues = issues.append(d, ignore_index=True)
+
+    return issues
+
+
+# list of queries, and the corresponding backend
+queries = [
+    (a_session, query_1),
+    (a_session, query_2),
+    (b_session, query_3),
+    (c_session, query_4),
+]
+
+
+# loop over each pair of session and query, calling the get_all_issues function, and save the dataframe we get each time
+dataframes = []
+
+for session, query in queries:
+    dataframe = get_all_issues(session, query)
+    dataframes.append(dataframe)
+
+# concatenate all data frames
+
+all = pd.concat(dataframes)
+</code></pre>
+<p>This code works just fine (because the 4 field names in the <code>d</code> dict are common to <code>a_session</code>, <code>b_session</code>, and <code>c_session</code>).</p>
+<p>The problem arises when I try to introduce a custom field that might be present in, say, <code>a_session</code> but not in <code>b_session</code> or <code>c_session</code>.</p>
+<p>For example:</p>
+<pre><code>for issue in all_issues:
+    d = {
+        'key' : issue.key,
+        'type' : issue.fields.type,
+        'creator' : issue.fields.creator,
+        'resolution' : issue.fields.resolution,
+        'system_change' : issue.fields.custom_field_123,  # only applicable to a_session and b_session
+        'system_resources' : issue.fields.custom_field_456,  # only applicable to c_session
+        'system_backup' : issue.fields.custom_field_789   # only applicable to b_session and c_session
+         }
+</code></pre>
+<p><code>custom_field_123</code> exists in <code>a_session</code> and <code>b_session</code>, but not in <code>c_session</code>.</p>
+<p><code>custom_field_456</code> exists only in <code>c_session</code>.</p>
+<p>And, <code>custom_field_789</code> exists in <code>b_session</code> and <code>c_session</code>.</p>
+<p>Running the code with this expanded dictionary results in the following error: <code>AttributeError: type object 'PropertyHolder' has no attribute 'custom_field_123'</code>.</p>
+<p>Other than using IF statements, is there a Pythonic way to allocate the only the <strong>valid field names</strong> in the <code>d</code> dictionary to the relevant sessions?  For example, as <code>a_session</code>/<code>query_2</code> is running, only consider <code>custom_field_123</code> (because that's the only one that's valid) and DISREGARD <code>custom_field_456</code> and <code>custom_field_789</code> (because passing these would result in the error message above).</p>
+<p>Thanks in advance for any help you can give this Python novice!</p>
+",5179643.0,,,,,2020-11-15 02:56:15,Pythonic way to avoid using multiple IF statements when iterating and appending to a Pandas data frame,<python><pandas><for-loop><if-statement>,0,3,,,,CC BY-SA 4.0
+64840801,1,64840919.0,,2020-11-15 02:56:08,,1,17,"<p>Given a dataframe <code>df</code> as follows:</p>
+<pre><code>   id building  floor_number floor_name
+0   1        A             8         5F
+1   2        A             4         4F
+2   3        A             3         3F
+3   4        A             2         2F
+4   5        A             1         1F
+5   6        B            14        17F
+6   7        B            13        16F
+7   8        B            20      world
+8   9        B            13      hello
+9  10        B            13        16F
+</code></pre>
+<p>I need to extract values from <code>floor_name</code> column then: groupby <code>building</code> then compare <code>floor_number</code>'s values for each row with <code>floor_name</code>'s maximum values, if floor number is bigger than the extracted values from floor name, then return new column <code>check</code> with content <code>invalid floor number</code>.</p>
+<p>This is expected result:</p>
+<pre><code>   id building          ...           floor_name                 check
+0   1        A          ...                   5F  invalid floor number
+1   2        A          ...                   4F                   NaN
+2   3        A          ...                   3F                   NaN
+3   4        A          ...                   2F                   NaN
+4   5        A          ...                   1F                   NaN
+5   6        B          ...                  17F                   NaN
+6   7        B          ...                  16F                   NaN
+7   8        B          ...                world  invalid floor number
+8   9        B          ...                hello                   NaN
+9  10        B          ...                  16F                   NaN
+</code></pre>
+<p>For extract values from <code>floor_name</code>, groupby <code>building</code> and get <code>max</code> for <code>floor_name</code>, I have used:</p>
+<pre><code>df['floor_name'] = df['floor_name'].str.extract('(\d*)', expand = False)
+df.groupby('building')['floor_name'].max()
+</code></pre>
+<p>Out:</p>
+<pre><code>building
+A     5
+B    17
+Name: floor_name, dtype: object
+</code></pre>
+<p>How could I finished the rest of code? Thanks at advance.</p>
+",8410477.0,,,,,2020-11-15 03:26:48,"Groupby, compare one column value with another column's maximum value in Pandas",<python-3.x><pandas><dataframe>,1,0,,,,CC BY-SA 4.0
+64840798,1,64840946.0,,2020-11-15 02:55:26,,1,21,"<p>I have the following dataframe</p>
+<pre><code>   it, A   B   C   D
+0  10, aa  mn  cd  kk
+1  100, ab  cd  wc  ll
+2  1000, wc  cd  mn  sf
+3  10000, ll  ll  kk  mn
+4  100000, wc  kk  mn  cd
+5  1000000, aa  ll  we  sf
+6  10000000, ss  aa  ss  kk
+</code></pre>
+<p>created as</p>
+<pre><code>options = [&quot;ab&quot;, &quot;cd&quot;, &quot;bb&quot;, &quot;aa&quot;, &quot;we&quot;, &quot;ss&quot;, &quot;kk&quot;, &quot;mn&quot;, &quot;re&quot;, &quot;wc&quot;, &quot;ll&quot;, &quot;sf&quot;]
+df = pd.DataFrame(columns=[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;])
+for i, it in enumerate([1,2,3,4,5,6,7]):
+    row = [i*10, random.sample(options, 1)[0], random.sample(options, 1)[0], 
+           random.sample(options, 1)[0], random.sample(options, 1)[0]]
+    df.loc[i] = row
+</code></pre>
+<p>The goal is to create a scatterplot where y axis are unique values from a dataframe in <strong>sorted order</strong> e.g options and a-axis corresponds to column <code>it</code>.
+Now depending on whether data belongs to column <code>A, B, C,</code> or <code>D</code> I want to color scatter-dots differently and specify a legend. So I know what class a dot comes from.</p>
+<p>How do I do it in seaborn or matplotlib?</p>
+<p>The way I am doing it in matplotlib is</p>
+<pre><code>iters = list(range(df.shape[0]))
+x, y = sort(iters, df[&quot;A&quot;])
+plt.scatter(x, y, color=&quot;red&quot;)
+x, y = sort(iters, df[&quot;B&quot;])
+plt.scatter(x, y, color=&quot;blue&quot;)
+...
+</code></pre>
+<p>but that does not sort the entire y-axis, only labels that belong to separate columns.</p>
+",3849781.0,,3849781.0,,2020-11-15 04:49:59,2020-11-15 04:53:16,Plot categorical scatterplot in seaborn or matplotlib,<python><pandas><matplotlib><seaborn>,1,0,,,,CC BY-SA 4.0
+64840794,1,,,2020-11-15 02:54:59,,0,8,"<p>I was having some fun time studying MRO and multiple inheritance in Python, when I came across a question that I have tried to solve without success.</p>
+<p>My question is when you use <code>super()</code> and <code>__init__</code> having multiple inheritance.</p>
+<p>If I'm having something like this:</p>
+<pre><code>class A():
+    def __init__(self):
+        print(&quot;I'm A&quot;)
+
+class B(A):
+    def __init__(self):
+        print(&quot;I'm B&quot;)
+    
+
+class C():
+    def __init__(self):
+        print(&quot;I'm C&quot;)
+
+class D(B, C):
+    def __init__(self):
+        super(D,self).__init__()
+
+d = D()
+print(D.__mro__)
+</code></pre>
+<p>The output is:</p>
+<pre><code>&gt;&gt;&gt; I'm B
+(&lt;class '__main__.D'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.A'&gt;, &lt;class '__main__.C'&gt;, &lt;class 'object'&gt;)
+</code></pre>
+<p>However, changing <code>super(D,self).__init__()</code> to <code>super(B,self).__init__()</code> I get <code>&quot;I'm A&quot;</code>. I understand that MRO looks the next class stated in <code>super(&lt;class&gt;,self)</code>, so if I put <code>super(B,self).__init__()</code>, it makes sense that it will go to class <code>A</code> and print <code>&quot;I'm A&quot;</code>.</p>
+<p>So up to this point I'm ok. My question is how can I make this print <code>&quot;I'm C&quot;</code>? Because I cannot run <code>super(A,self).__init__()</code>, since <code>D</code> does not directly inherits <code>A</code>.</p>
+",13283748.0,,,,,2020-11-15 02:54:59,"super(<class>,self) with multiple inheritance not executing the __init__ of other classes",<python-3.x><multiple-inheritance><method-resolution-order>,0,0,,,,CC BY-SA 4.0
+64840786,1,64840824.0,,2020-11-15 02:52:57,,0,18,"<p>Trying to figure out NameError: in python program. The program is supposed to give a user three choices for different types of carpet then prompts them for the height and width. Based on the price of the carpet and what they input for their height and width it should print out the total cost for them. I am getting a NameError saying carpetgrade is not defined. Could anyone check it out and explain why it isnt?</p>
+<pre><code>def full_cost(height, width, carpetgrade):
+
+    cost = carpetgrade * area
+
+    area = height * width
+
+    return cost
+        
+polyester = 45
+
+wool = 75
+
+acrylic = 100
+
+print(&quot;Choose a grade of carpet. There is polyester, wool, and acryilic&quot;)
+
+carpet_selection = (input(&quot;Which carpet grade do you choose?&quot;))
+
+if (carpet_selection == polyester):
+    carpetgrade = 45
+                       
+elif (carpet_selection == wool):
+    carpetgrade = 75
+    
+elif (carpet_selection == acrylic):
+    carpetgrade = 100
+
+height = int(input(&quot;What is the height of the room?&quot;))
+
+width = int(input(&quot;What is the width of the room?&quot;))
+
+complete_cost = full_cost(height, width, carpetgrade)
+
+print(&quot;The cost of your carpet is ,complete_cost&quot;)
+</code></pre>
+<p>Here is the error:
+<a href=""https://i.stack.imgur.com/hdXAc.png"" rel=""nofollow noreferrer"">enter image description here</a></p>
+<pre><code>Traceback (most recent call last):
+  File &quot;C:\Users\Austin\Desktop\Assignment 3.py&quot;, line 34, in &lt;module&gt;
+    complete_cost = full_cost(height, width, carpetgrade)
+NameError: name 'carpetgrade' is not defined
+</code></pre>
+",13434638.0,,13873980.0,,2020-11-15 03:02:12,2020-11-15 03:02:12,Trying to figure out NameError: in Python program,<python>,1,2,,,,CC BY-SA 4.0
+64840782,1,,,2020-11-15 02:52:19,,0,35,"<p>Okay, that's the program, it's very dumb and I created it just for the sake of making this question, since the problem is here too:</p>
+<pre><code>def main(number_one, number_two):
+    result = number_one * number_two
+
+def moltiplicate_per_2000(result):
+    result = result * 2000
+    return result
+</code></pre>
+<p>If I call this from the console writing main(int1,int2), where int1 and int2 are a random integer number, the function doesn't return anything. If I try to debug putting a main(4,6) at the end, nothing happens (I pass on the two functions and the call and nothing happens). Am I doing anything wrong?</p>
+<p>I don't get any error. Just blank.
+If I write:</p>
+<pre><code>def main(number_one, number_two):
+    result = number_one * number_two
+    result = result * 2000
+    return result
+</code></pre>
+<p>Works perfectly, giving the correct output</p>
+<pre><code>def main(number_one, number_two):
+result = number_one * number_two
+moltiplicate_per_2000(result)
+</code></pre>
+<p>def moltiplicate_per_2000(result):
+result = result * 2000
+return result</p>
+<p>Why THIS doesn't give anything back? I call the main function, from there I call the moltiplicate_per_2000 function then from there I return. Why this doesn't work?</p>
+",14589506.0,,14589506.0,,2020-11-15 03:11:05,2020-11-15 04:20:57,My program doesn't return anything if I put more than one function?,<python>,1,7,,,,CC BY-SA 4.0
+64840773,1,,,2020-11-15 02:49:20,,0,21,"<p>The question is that:</p>
+<p><em>Suppose I have a string <code>S='ABC'</code>, then I want the output to be this list<code>['AAA','BBB','CCC','AAB','ABB','AAC','ACC','BBC','BCC']</code></em></p>
+<p>How do I achieve this result?</p>
+",14373544.0,,14373544.0,,2020-11-15 02:53:26,2020-11-15 04:26:36,How to print the strings having repeating characters?,<python><string><permutation>,1,2,,,,CC BY-SA 4.0
+64840771,1,,,2020-11-15 02:48:33,,0,12,"<p>I am trying to create a python function using the Google Drive API to create a new Google Drive file with content.</p>
+<p>I am a little confused (after looking at the documentation) which URI to use, as well as what I need to put in the response body to create this file. So far, this is the function to create the new file as well as the function to make the API call (which is working):</p>
+<pre><code>def make_request(self, method, url, url_params=dict(),
+                     headers=dict(), body=None):
+        # add Authorization header
+        headers[&quot;Authorization&quot;] = &quot;Bearer &quot; + self.token  # bearer authentication
+
+        # make the request
+        try:
+            r = requests.request(method, url, headers=headers, params=url_params, data=body)
+        except Exception as e:
+            return 9999, str(e)
+
+        # get the body of the response as text
+        body = r.text
+
+        # return value contains the error message or the body
+        if r.status_code &gt; 299:
+            res_dict = json.loads(body)
+            ret_val = res_dict[&quot;error&quot;][&quot;message&quot;]
+        else:
+            ret_val = body
+
+        return r.status_code, ret_val
+def gd_create_text_file(self, name, parent_id, contents):
+        request_body = {
+            &quot;name&quot;: name,
+            &quot;parents&quot;: &quot;[&quot; + parent_id + &quot;]&quot;,
+            &quot;mimeType&quot;: &quot;application/vnd.google-apps.document&quot;
+        }
+        request_body_json = json.dumps(request_body)
+        header = {
+            &quot;Content-Type&quot;: &quot;application/json&quot;
+        }
+        
+        create_json = self.make_request(&quot;POST&quot;, &quot;https://www.googleapis.com/upload/drive/v3/files/&quot;, headers=header, body=request_body_json)
+
+        if(create_json[0] != 200):
+            # an error code was thrown, return None
+            print(&quot;Error&quot; + str(create_json[0]))
+            return None
+        else:
+            #no error, create and return dictionary
+            dictionary = {
+                &quot;id&quot;: json.loads(create_json[1])[&quot;id&quot;],
+                &quot;name&quot;: json.loads(create_json[1])[&quot;name&quot;]
+            }
+            print(&quot;dict: &quot; + str(dictionary))
+            return dictionary
+</code></pre>
+<p>Currently, this does not create the file, and it does not have any of the contents of the file. What can I do to fix what I currently have, and add contents to the file?</p>
+<p>Thanks!</p>
+",9431400.0,,9431400.0,,2020-11-15 03:56:32,2020-11-15 03:56:32,Creating a new file with text contents google drive api?,<python><file><google-drive-api>,0,4,,,,CC BY-SA 4.0
+64840768,1,,,2020-11-15 02:48:08,,0,7,"<p>I'm running an embedded Linux build on the TI Sitara AM335x module, and using their Processor SDK  to build a custom u-boot, kernel, and root filesystem.</p>
+<p>Their latest version of the SDK is 06.03 and is pinned against Yocto Thud distributions (which are a bit old now). I've got everything I need setup, have my new BSP, can build everything I need to, but there is exactly one thing I need that I can't get working. The SDK comes with Python 3.5, and I need Python 3.6+ to run a certain tool.</p>
+<p>Strictly as an experiment, I've built Docker into the system, and I can run newer containers in there - but that comes with a non-trivial size and performance impact, as well as some additional deployment and upgrade considerations.</p>
+<p>I'm trying to figure out if there is a way for me to upgrade only the Python distribution, but I can't seem to find much information about that. There are some notes around about sequentially applying all the patches from later distributions, and trying to compile, debug, etc, but there are a lot of patches and it would be easy to miss something.</p>
+<p>I do know one option is to throw away the SDK and go straight Yocto Dunfell, but the Processor SDK comes with a lot of kernel and u-boot tweaks baked in - so I'd like to stick with that in the short term (long, long term plan is to move to straight Yocto and get the latest/greatest).</p>
+<p>TLDR; Is there any simple/streamlined mechanism to upgrade Yocto Thud to Python3.6+ without too much risk in finding and applying kernel and rfs patches, or using Docker inside of the rootfs, or moving away from the Processor SDK?</p>
+",992509.0,,,,,2020-11-15 02:48:08,How to upgrade Python using Yocto pinned to Thud?,<python><embedded-linux><yocto><texas-instruments><arago>,0,0,,,,CC BY-SA 4.0
+64840747,1,,,2020-11-15 02:44:32,,0,15,"<p>I'm trying to update date values based on multiple conditions and my current code doesn't change the date values at all. My data looks like this:</p>
+<pre><code>       ID       StartDate       EndDate      Type    Prev_EndDate   Prev_ID
+0     12781     2017-09-25     2017-11-09     A          NaN          NaN
+1     12781     2017-11-10     2017-12-08     A       2017-11-09     12781 
+2     12781     2017-11-10     2018-07-06     B       2017-12-08     12781
+3     12781     2018-07-07     2018-09-14     B       2018-07-06     12781
+
+</code></pre>
+<p>If you look at row 1 and row 2, there is an overlap in the timeline and I want to update the StartDate value to get rid of the overlap. But I want to update the start date only when the Type is &quot;B&quot; and the time range is overlapping for the same ID. That's why I put extra conditions such as df['ID'] == df['Prev_ID']</p>
+<p>My current code is here:</p>
+<pre><code>if ((df['ID'] == df['Prev_ID']).all().all() and (df['StartDate'] &lt;= df['prev_EndDate']).all().all() and (df['Position Type'] == 'B').all().all()):
+    df['StartDate'] = pd.DatetimeIndex(df['prev_EndDate']) + pd.DateOffset(1)
+</code></pre>
+<p>The data type of Start Date, End Date, and Prev_EndDate is datetime but my code is not making any changes. I'm not sure about my boolean options (e.g. all().all()) and wonder if that's why my code is not working. How do I make this work?</p>
+",14193972.0,,,,,2020-11-15 04:34:48,Update date column values based on multiple conditions,<python><python-3.x><pandas>,1,0,,,,CC BY-SA 4.0
+64840731,1,,,2020-11-15 02:41:03,,-2,18,"<blockquote>
+<p>Output range with increment of 10.</p>
+</blockquote>
+<blockquote>
+<p>Write a program whose input is two integers, and whose output is the first integer and subsequent increments of 10 as long as the value is less than or equal to the second integer.</p>
+</blockquote>
+<blockquote>
+<p>Ex: If the input is -15 30, the output is:</p>
+</blockquote>
+<blockquote>
+<p>-15 -5 5 15 25</p>
+</blockquote>
+<blockquote>
+<p>Ex: If the second integer is less than the first as in 20 5, the output is:</p>
+</blockquote>
+<blockquote>
+<p>Second integer can't be less than the first.
+For coding simplicity, output a space after every integer, including the last.</p>
+</blockquote>
+",14640533.0,,2308683.0,,2020-11-15 02:43:50,2020-11-15 02:43:50,"Write a program whose input is two integers, and whose output is the first integer and subsequent increments of 10",<python>,0,3,,2020-11-15 03:13:07,,CC BY-SA 4.0
+64840708,1,,,2020-11-15 02:36:44,,-1,8,"<h1>this is the app.py code I try to print the result but it prints &quot;fake&quot; without checking the condition</h1>
+<pre><code>@app.route('/predict', methods=['POST'])
+def predict():
+   ../
+</code></pre>
+<p>Vectorization</p>
+<pre><code>corpus = DataBase_text
+FE = TfidfVectorizer()
+X_text = FE.fit_transform(corpus) 
+</code></pre>
+<p>Loading our ML Model</p>
+<pre><code>json_file = open('models/RnnModel.json', 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+loaded_model = model_from_json(loaded_model_json)
+</code></pre>
+<p>load weights into new model</p>
+<pre><code>loaded_model.load_weights(&quot;models/RnnModel.h5&quot;)
+</code></pre>
+<p>Receives the input query from a form</p>
+<pre><code>if request.method == 'POST':
+    reviwequery = request.form['reviwequery']
+    data = [reviwequery]
+    vect = FE.transform(data).toarray()
+my_prediction = loaded_model.predict(vect)
+
+if(my_prediction[0] &gt;= 0.40):
+     output= &quot;Fake&quot;
+elif(my_prediction[0] &lt;= 0.39):
+     output= &quot;Real&quot;
+ 
+return render_template('results.html',prediction_text='The review is{}'.format(output))
+
+
+
+if __name__ == '__main__':
+  app.run(debug=True)
+</code></pre>
+<h1>Any idea, please</h1>
+",14339586.0,,,,,2020-11-15 02:36:44,how I can get the result from model in flask,<python><machine-learning><flask><data-analysis>,0,0,,,,CC BY-SA 4.0
+64840707,1,,,2020-11-15 02:36:34,,0,13,"<p>So I wrote this function to perform minmax normalization for a given numpy 2-D array in python.</p>
+<pre><code>def min_max_norm(self, dataset):
+    df = pd.DataFrame(dataset)
+    normalized_df = df
+    i=0 #indexing columns
+    for col in df:
+        curr_col = df[col].values
+        max_arr = df[col].max()
+        min_arr = df[col].min()
+        j = 0 #to index rows
+        print(col)
+        for elem in curr_col:
+            updated_elem = (elem - min_arr)/(max_arr - min_arr)
+            if(math.isnan(updated_elem)):
+                updated_elem = 0
+            normalized_df.iloc[j,i] = updated_elem
+            j += 1
+        i+=1
+    normalized = normalized_df.to_numpy()
+    return normalized
+</code></pre>
+<p>Firstly il explain my logic then il present the problem. I take a numpy 2D dataset, convert it into a pandas dataframe, loop through each column of that dataframe and grab that current column, it's max and min values. I then iterate through each element in the column (i.e rows) and perform min-max normalization.</p>
+<p>I tested the code first not in the form of a function (i.e running indep in a cell in jupyter notebook) but when i merged it with my class and wrote it as a function i get the error</p>
+<p>&quot;TypeError: unsupported operand type(s) for -: 'str' and 'str'&quot;.</p>
+<p>I then decided to print the 'col' as you can see, and it seems to loop through the columns twice instead of once. I.e if there were 63 columns, it would go back to column zero instead of breaking. This did not happen when i tested it not as a function.
+Any help is appreciated as i have no idea what to do since it works differently in a function and independently of a function.</p>
+",14640511.0,,,,,2020-11-15 02:55:08,Min-Max normalization function iterating through columns twice,<python><normalization><data-analysis><minmax>,1,2,,,,CC BY-SA 4.0
+64840688,1,64840719.0,,2020-11-15 02:33:08,,0,33,"<p>I tried solving the question below on codingbat:</p>
+<p>&quot;Given an array of integers, return True if the sequence of numbers 1, 2, 3 appears in the array somewhere&quot;.</p>
+<p>This was my solution which returned with the error &quot;index out of range&quot;:</p>
+<pre><code>def array123(nums):
+  for i in range(len(nums)):
+    if nums[i]==1 and nums[i+1]==2 and nums[i+2]==3:
+      return True
+  return False
+</code></pre>
+<p>This was Codingbat's solution:</p>
+<pre><code>def array123(nums):
+  for i in range(len(nums)-2):
+    if nums[i]==1 and nums[i+1]==2 and nums[i+2]==3:
+      return True
+  return False
+</code></pre>
+<p>I know I'm missing a trick here. Please could someone explain why I have to iterate over range(len(nums)-2)??</p>
+<p>Thank you.</p>
+",14561229.0,,,,,2020-11-15 03:22:05,Python beginner - Question on for-loop iteration,<python><function><for-loop>,3,2,,,,CC BY-SA 4.0
+64840687,1,64840696.0,,2020-11-15 02:33:03,,1,11,"<p>I have a dataset with abbreviated month names, and I have tried to follow some other solutions posted here, such as :</p>
+<pre><code>r.Date = pd.to_datetime(r.Date, format='%MMM %d, %Y')
+</code></pre>
+<p>but unfortunately it is giving me a ValueError: time data 'Nov 13, 2020' does not match format '%d %B, %Y' (match). The months dates are all abbreviated.</p>
+",13090234.0,,,,,2020-11-15 02:34:33,"How to convert string date (Nov 13, 2020) to datetime in pandas?",<python><pandas>,1,0,,,,CC BY-SA 4.0
+64840675,1,,,2020-11-15 02:30:35,,0,19,"<p>So, I used python package &quot;gender-guesser&quot; to detect the gender of the person based on their names. However, I want to identify the gender from a sentence that does not have the person name.</p>
+<p>Suppose I have the below sentence:</p>
+<p>&quot;Prior to you with a 14 year old male, who got out of bed and had some sort of syncopal episode.&quot;</p>
+<p>The sentence is just an example and only has the word male and not the person's name. But, the input can contain may contain other words like boy, girl, lady, transgender, guy, woman, man, unknown, etc.</p>
+<p>This is what I am currently trying to do, but may not be correct for what I want the end result:</p>
+<pre><code>#original string
+wordlist=tokens
+# using split() function
+
+# total no of words
+male_count=0
+female_count=0
+
+for i in range(len(wordlist)):
+  if wordlist[i]==('male' or 'boy' or 'guy' or 'man'):
+    print(i)
+    male_count= male_count+1
+  
+  else: 
+    if wordlist[i]==('female' or 'girl' or 'lady' or 'woman'):
+      female_count= female_count+1
+</code></pre>
+<p>Is there a better way to identify the gender?</p>
+",14443469.0,,,,,2020-11-15 02:47:19,Python: Guess gender from the input,<python><nlp><stanford-nlp>,1,0,,2020-11-15 02:49:45,,CC BY-SA 4.0
+64840672,1,,,2020-11-15 02:30:13,,0,11,"<p>I am building a dash application on top of huge amounts of data points. As I do not want to load all data every time I need them from disk (&gt; 30m datapoints), I built a DataManager, managing the data. As the application has multiple scripts for each view, I passed the manager to each of them when switching the page.</p>
+<p>Well, as Python is not C, Java nor Swift, it actually does not work with pointers. So is there a python-way to implement such a behavior without loading all data points when opening a site?</p>
+<p>Here is my Python implementation so far:</p>
+<pre><code>dm = DataManager.DataManager()
+
+@app.callback(Output('page-content', 'children'),
+            [Input('url', 'pathname')])
+def display_page(pathname):
+    if pathname == '/runningmap':
+        return RunningMap(dm)
+    elif pathname == '/settings':
+        return Settings(dm)
+    else:
+        return RunningMap(dm)
+</code></pre>
+",2687635.0,,,,,2020-11-15 03:32:21,Pointer workaround in Python,<python><pointers><plotly-dash>,1,1,,,,CC BY-SA 4.0
+64840667,1,,,2020-11-15 02:29:23,,-1,25,"<pre><code>from time import sleep
+inningscounter = 0
+userscore = 0
+computerscore = 0
+def batting(inctr, totalu, totalcpu):
+    totalu = 0
+    inctr = inctr + 1
+    print(&quot;General Instructions for Batting:&quot;)
+    print(&quot;1.Only values from 0 to 10 are permitted. Usage of any other character will lead to abortion of program. Scores cannot be retrieved&quot;)
+    print(&quot;2.Zero can only be used thrice. Further usage will lead to terimation of game&quot;)
+    print(&quot;3.Keyboard Shortcut Ctrl+C can be used but Ctrl+Z cannot be used&quot;)
+    print(&quot;Getting Things Ready......&quot;)
+    sleep(3)
+    outvar = False
+    zerocounter = 0
+    while outvar == False:
+        usernumber = int(input(&quot;Enter value:\n&quot;))
+        if usernumber not in range(0,11):
+            raise ValueError(&quot;Only Values from 1 to 10 are accepted&quot;)
+        cpunumber = random.randint(1,10)
+        print(&quot;CPU gave the number&quot;,cpunumber)
+        if cpunumber != usernumber:
+            if usernumber == 0:
+                zerocounter +=1
+                if zerocounter &lt;= 3:    
+                    if zerocounter &lt; 3:
+                        print(&quot;You have only&quot;,3-zerocounter,&quot;chances of using zero out of 3 chances&quot;)
+                    elif  zerocounter == 3:
+                        print(&quot;You have exhausted all of your Zero Usage chances.\nReinputting it again would result in termination of the game!&quot;)
+                    usernumber = cpunumber
+                elif zerocounter &gt; 3:
+                    print(&quot;As you have entered a Zero after exhausting your zerousage chances, the game will end&quot;)
+                    outvar = True
+            totalu += usernumber
+            print(&quot;Score as of now is&quot;,totalu)
+        elif cpunumber == usernumber:
+            print(&quot;and you are OUT!&quot;)
+            outvar = True
+    print(&quot;Your score was&quot;,totalu)
+    return inctr
+    
+
+def bowl(inctr, totalu, totalcpu):
+    inctr += 1
+    print(&quot;General Instructions for Bowling:&quot;)
+    print(&quot;1.Only values from 0 to 10 are permitted. Usage of any other character will lead to abortion of program. Scores cannot be retrieved&quot;)
+    print(&quot;2.Usage of Zero doesnot give any special priveliges for Bowler. It can be used multiple times&quot;)
+    print(&quot;3.Keyboard Shortcut Ctrl+C can be used but Ctrl+Z cannot be used&quot;)
+    print(&quot;Getting Things Ready......&quot;)
+    sleep(3)
+    outvar = False
+    while outvar == False:
+        usernumber = int(input(&quot;Enter value:\n&quot;))
+        if usernumber not in range(0,11):
+            raise ValueError(&quot;Only Values from 1 to 10 are accepted&quot;)
+        cpunumber = random.randint(1,10)
+        print(&quot;CPU gave the number&quot;,cpunumber)
+        if cpunumber != usernumber:
+            if cpunumber == 0:
+                cpunumber = usernumber
+            totalcpu += cpunumber
+            print(&quot;Score as of now is&quot;,totalcpu)
+        elif cpunumber == usernumber:
+            print(&quot;and the CPU became OUT!&quot;)
+            outvar = True
+    print(&quot;CPU score was&quot;,totalcpu)
+    return inctr
+    
+userstate = 'Bowl'
+if userstate == 'Bat':
+    batting(inningscounter, userscore,computerscore)
+    if inningscounter == 1:
+        bowl(inningscounter, userscore, computerscore)
+    elif inningscounter == 2:
+        scdiff = userscore-computerscore
+        if scdiff &lt; 0:
+            print('The computer won by',abs(scdiff),&quot;runs&quot;)
+        elif scdiff &gt; 0:
+            print(&quot;You won by&quot;,scdiff,&quot;runs&quot;)
+    else:
+        print(inningscounter)
+
+elif userstate == 'Bowl':
+    bowl(inningscounter, userscore,computerscore)
+    if inningscounter == 1:
+        batting(inningscounter, userscore, computerscore)
+    elif inningscounter == 2:
+        scdiff = userscore-computerscore
+        if scdiff &lt; 0:
+            print('The computer won by',abs(scdiff),&quot;runs&quot;)
+        elif scdiff &gt; 0:
+            print(&quot;You won by&quot;,scdiff,&quot;runs&quot;)
+</code></pre>
+<p>I am working not his Python code which plays Hand Cricket with the CPU. If the number you choose from 1 to 10 is the same as the number returned by Python(from random) then the batsman loses.
+Both batting and bowling are working but after a user finishes batting, the program does not move to bowling. I declared a variable as innings counter which gets incremented by 1 if a function is executed. But the the incremntation happens only inside the function but the value is not updated to original variable. PLease Help!!</p>
+",13882705.0,,,,,2020-11-15 02:41:07,Values are not updated and returned inside a function in Python,<python><python-3.x><function>,1,1,,,,CC BY-SA 4.0
+64840659,1,,,2020-11-15 02:27:23,,1,13,"<p>So I saw this Project in the book, Automate the Boring stuff with Python, and I was just going great with all the projects and all that, but I saw the project &quot; Character Picture Grid &quot;, and I was completely lost. And I had look here, and I found a code for Character Picture Grid</p>
+<pre><code>grid = [['.', '.', '.', '.', '.', '.'],
+   ['.', 'O', 'O', '.', '.', '.'],
+   ['O', 'O', 'O', 'O', '.', '.'],
+   ['O', 'O', 'O', 'O', 'O', '.'],
+   ['.', 'O', 'O', 'O', 'O', 'O'],
+   ['O', 'O', 'O', 'O', 'O', '.'],
+   ['O', 'O', 'O', 'O', '.', '.'],
+   ['.', 'O', 'O', '.', '.', '.'],
+   ['.', '.', '.', '.', '.', '.']]
+
+def gridOutput(grid):
+    for s in range(len(grid[0])):
+        print()
+        for i in range(len(grid)):
+            print(grid[i][s],end='')
+gridOutput(grid)
+</code></pre>
+<p>So my question is, can someone, please explain to me how this code works, <strong>thanks!</strong></p>
+",14511060.0,,,,,2020-11-15 02:59:23,How does this Python code works? [Character Picture Grid],<python><python-3.x>,1,0,,,,CC BY-SA 4.0
+64840650,1,,,2020-11-15 02:24:45,,0,21,"<p>I'm new to programming, this being my first post, but I was wondering if there was a way to make selenium run while my computer is turned off? I made an instagram bot with selenium webdriver python but it only runs when I run it from my computer and turns off when I turn off my computer. I have seen post saying to host it in PythonAnywhere which I tried but selenium requires a webdriver (im using firefox so gekodriver). Is there a way of fixing this or is there another way of making an insagram bot without selenium webdriver?
+Thank you</p>
+",14640484.0,,,,,2020-11-15 03:02:16,How can I have a python selenium webdriver script run 24/7?,<python><selenium><selenium-webdriver><bots><instagram>,1,2,,,,CC BY-SA 4.0
+64840640,1,,,2020-11-15 02:22:15,,0,11,"<p>I want to create a discord bot which sends a dataframe but the problem is that there is a 2000 character limit. Therefore, I plan on sending the dataframe on at a time. However, the problem with what I currently know of is that it sends the column name every time a new row is sent, and I don't want that to happen. Is there any way to only have the column names sent once? Any help will be appreciated!</p>
+",14640467.0,,,,,2020-11-15 02:22:15,Send rows of a panda dataframe one at a time,<python><pandas>,0,0,,,,CC BY-SA 4.0
+64840626,1,,,2020-11-15 02:19:21,,0,7,"<p>I am plotting a polar bar chart using the following code:</p>
+<pre><code>import numpy as np 
+import matplotlib.pyplot as plt 
+import pandas as pd 
+
+
+Row1, Row2, Row3 = ['A',180,2], ['A',270,6], ['A',360,3]
+
+df_polar = pd.DataFrame([Row1, Row2, Row3]) 
+df_polar.columns = ['Type', 'Angle', 'Count']
+df_polar = df_polar.set_index('Angle')
+
+deg = np.pi/180 
+Angle =  np.array(df_polar.index.tolist()) 
+theta = Angle = Angle * deg 
+
+count = radii = df_polar['Count'] 
+width = 30*deg 
+colors = plt.cm.viridis(df_polar['Count'] / 4.)
+
+ax = plt.subplot(111, projection='polar') 
+ax.bar(theta, count, width=width, bottom=0, color=colors, alpha=.6)
+ax.set_thetagrids(range(0, 360, 30)) 
+ax.set_theta_zero_location(&quot;N&quot;) # Set 0 degrees to the top of the plot 
+ax.set_theta_direction(-1) 
+ax.set_rlabel_position(15) 
+plt.show()
+</code></pre>
+<p>The current limitation is that the number of plots does not scale for additional values for Column 'Type'. I have attempted to use <a href=""https://seaborn.pydata.org/examples/radial_facets.html"" rel=""nofollow noreferrer"">FacetGrid</a> to solve the issue (with limited success):</p>
+<pre><code>import numpy as np
+import pandas as pd
+import seaborn as sns
+
+sns.set()
+
+Row1, Row2, Row3 , Row4 = ['A',180,2], ['A',270,6], ['A',360,3] , ['B',360,3]
+
+df_polar = pd.DataFrame([Row1, Row2, Row3, Row4])
+df_polar.columns = ['Type', 'Angle', 'Count']
+
+# Generate an example radial datast
+df = df_polar
+
+# Set up a grid of axes with a polar projection
+ax = sns.FacetGrid(df, col=&quot;Type&quot;, hue=&quot;Type&quot;,
+                  subplot_kws=dict(projection='polar'), height=4.5,
+                  sharex=False, sharey=False, despine=False)
+
+# Draw a scatterplot onto each axes in the grid
+ax.map(sns.scatterplot, &quot;Angle&quot;, &quot;Count&quot;)  
+</code></pre>
+<p>What I am struggling with are: changing from a scatter to a barplot, set_thetagrids, set_theta_zero_location, set_theta_direction, set_rlabel_position.</p>
+<p>Any help will be greatly appreciated. Thank you.</p>
+",5161059.0,,,,,2020-11-15 02:19:21,Polar Bar chart using Facetgrid in Python,<python><seaborn><facet-grid>,0,0,,,,CC BY-SA 4.0
+64840621,1,,,2020-11-15 02:18:29,,-1,25,"<p>This code is meant to print 2 values when a button is pressed</p>
+<pre><code>from tkinter import *
+
+def func_1():
+    print(100)
+
+def func_2():
+    print(200)
+
+root = Tk()
+canvas = Canvas(root, width=500, height=300)
+btn = Button(root, text='click me', command=func_1 and func_2)
+btn.pack()
+</code></pre>
+<p>Unfortunately, whenever the button is pressed, only the latter of the two functions is printed. What's wrong with the code and how do I get it to work?</p>
+",14640482.0,,,,,2020-11-15 02:44:06,Is there a way to carry out 2 or more functions when a button is pressed?,<python><function><button>,2,1,,,,CC BY-SA 4.0
+64840612,1,,,2020-11-15 02:15:56,,1,15,"<p>I know some of the answers for this one would be:</p>
+<pre><code>for member in guild.members:
+    id = member.id
+    #do stuff here
+</code></pre>
+<p>But no, that doesn't work for me, I already tried that and it only has the bot itself inside of the list of members. So I'm asking if there is another way to do this.</p>
+",14640462.0,,,,,2020-11-15 02:21:12,How to get members of a discord guild(discord.py)?,<python><python-3.x><discord.py><python-3.8>,1,1,0.0,,,CC BY-SA 4.0
+64840602,1,,,2020-11-15 02:13:24,,0,16,"<p>I'm having trouble with what seems like it should be a very simple query. For each unique name, I want to return only the name of the user with the lowest age</p>
+<p>Here is a <strong>Basic example</strong>: <a href=""http://sqlfiddle.com/#!9/ce2f7e4/16"" rel=""nofollow noreferrer"">http://sqlfiddle.com/#!9/ce2f7e4/16</a></p>
+<p>Sample database:</p>
+<pre><code> +-----+-------+-----+
+| id  | name  | age |
++-----+-------+-----+
+|  1  | joe   |  50 |
+|  2  | joe   |  25 |
+|  3  | fred  |  25 |
+|  4  | fred  |  50 |
+|  5  | bob   |  30 |
++-----+-------+-----+
+</code></pre>
+<p>This is the <strong>Current attempt</strong> I'm trying:</p>
+<pre><code>session.query(User).group_by(User.name).order_by(User.name,User.age).all()
+</code></pre>
+<p>In raw SQL:</p>
+<pre><code>SELECT t.id,t.name,t.age from user t
+GROUP BY t.name
+ORDER BY t.name, t.age;
+</code></pre>
+<p>However this returns the wrong result as you can see in the example. I get one row for each name as needed, but the user selected is not the one with the lowest age for each unique name.</p>
+<p><strong>Desired result:</strong></p>
+<pre><code>+-----+-------+-----+
+| id  | name  | age |
++-----+-------+-----+
+|  2  | joe   |  25 |
+|  3  | fred  |  25 |
+|  5  | bob   |  30 |
++-----+-------+-----+
+</code></pre>
+<p>As you can see, for each unique name the row returned should be the user with that name who has the lowest age. How can I write an sqlalchemy query to get this result? Thanks</p>
+",14640346.0,,,,,2020-11-15 02:26:53,How do you select a specific row from a group in a group_by statement in python SQLAlchemy (sqlite)?,<python><sql><sqlite><sqlalchemy>,2,0,,,,CC BY-SA 4.0
+64840595,1,,,2020-11-15 02:12:14,,0,21,"<p>I have made a sklearn prediction by using the Naive Bayes and Decision Tree, how can I get the F1 score and accuracy score?</p>
+<p><img src=""https://i.stack.imgur.com/gXqJK.png"" alt="""" /></p>
+",14640469.0,,12581835.0,,2020-11-15 03:23:22,2020-11-15 03:23:22,How to calculate the F1 score and accuracy score based on these code?,<python><scikit-learn>,0,1,,,,CC BY-SA 4.0
+64840594,1,,,2020-11-15 02:12:13,,-1,20,"<p>I have created a Pascal's triangle using list function in Python. I'm now looking to format it by including hexagons or circle patterns to each element of the triangle. I also need to include colors such that can differentiate odd numbers and even numbers. If possible, please give me some insights and guidance.</p>
+<p>Thank you.</p>
+",14640461.0,,2292722.0,,2020-11-15 04:55:37,2020-11-15 04:55:37,Formatting shapes in Python,<python><python-3.x><formatting><pascals-triangle>,0,0,,,,CC BY-SA 4.0
+64840592,1,,,2020-11-15 02:11:53,,0,8,"<p>I cannot activate virtualenv on python.
+PS C:\voice_assistant&gt; venv\Scripts\activate.bat
+could not be loaded. For more information, run<br />
+'Import-Module venv'.
+At line:1 char:1</p>
+<ul>
+<li>venv\Scripts\activate.bat</li>
+<li>
+<pre><code>  + CategoryInfo          : ObjectNotFound: (v  
+env\Scripts\activate.bat:String) [], Command   
+NotFoundException
+  + FullyQualifiedErrorId : CouldNotAutoLoadMo  
+dule
+</code></pre>
+</li>
+</ul>
+",14639972.0,,,,,2020-11-15 02:11:53,I tried to activate virtualenv and got error like venv\Scripts\activate.bat could not be loaded,<python>,0,1,,,,CC BY-SA 4.0
+64840589,1,,,2020-11-15 02:10:51,,0,14,"<p>I have used pip install pandas, numpy, matplotlib. And pip install them again.
+Both installation and uninstallation are successful.
+The result still shows an error. ! no effect.</p>
+<p>I spent a lot of time without knowing what happened. The online solution is to delete duplicate files, which is useless.</p>
+<p>Code：</p>
+<pre><code>import pandas as pd
+</code></pre>
+<p>Error：</p>
+<pre><code>RuntimeError                              Traceback (most recent call last)
+&lt;ipython-input-4-7dd3504c366f&gt; in &lt;module&gt;
+----&gt; 1 import pandas as pd
+~\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\__init__.py in &lt;module&gt;
+      9 for dependency in hard_dependencies:
+     10     try:
+---&gt; 11         __import__(dependency)
+     12     except ImportError as e:
+     13         missing_dependencies.append(f&quot;{dependency}: {e}&quot;)
+</code></pre>
+",14482398.0,,,,,2020-11-15 02:10:51,"Why does The current Numpy installation still appear?! pandas,numpy,matplotlib error",<python><python-3.x><pandas><numpy><matplotlib>,0,3,,,,CC BY-SA 4.0
+64840580,1,,,2020-11-15 02:09:48,,0,10,"<p>I'm new at Django Rest Framework and I wonder how methods create and update are called inside a ModelSerializer Class.</p>
+<p>What I understand is that create and update methods are automatically triggered when a POST or PUT request is sent. Is there a way to call a new function, like say_hello()?</p>
+<p>Here's an example. I want to call method <strong>say_hello()</strong> when I hit a <strong>PUT Request</strong></p>
+<pre><code>    class UserSerializer(serializers.ModelSerializer):
+        &quot;&quot;&quot;Serializer for the users object&quot;&quot;&quot;
+    
+        class Meta:
+            model = User
+            fields = &quot;__all__&quot;
+    
+        def create(self, validated_data):
+            &quot;&quot;&quot;Create a new user with encrypted password and return it&quot;&quot;&quot;
+            return get_user_model().objects.create_user(**validated_data)
+    
+        def update(self, instance, validated_data):
+            &quot;&quot;&quot;Update an user, setting the password and return it&quot;&quot;&quot;
+            password = validated_data.pop('password', None)
+            user = super().update(instance, validated_data)
+    
+            if password:
+                user.set_password(password)
+                user.save()
+    
+            return user
+    
+        def say_hello(self, validated_data):
+            print(validated_data)
+            return &quot;Hello you&quot;
+</code></pre>
+",10354461.0,,,,,2020-11-15 02:09:48,Django Rest Framework Serializer Method Calling,<python><django><django-rest-framework>,0,1,,,,CC BY-SA 4.0
+64840571,1,,,2020-11-15 02:08:17,,0,13,"<p>I have the following (toy) data set:</p>
+<pre><code>import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'Manufacturer':['Allen Edmonds', 'Louis Vuitton 23', 'Louis Vuitton 8', 'Gulfstream', 'Bombardier', '23 - Louis Vuitton', 'Louis Vuitton 20'],
+                   'System':['None', 'None', '14 Platinum', 'Gold', 'None', 'Platinum 905', 'None']
+                  })
+</code></pre>
+<p>Next, I create a column named <code>Manufacturer</code> based on the two existing columns:</p>
+<pre><code>df.loc[(df['Manufacturer'].str.contains('Louis')) &amp; 
+       (df['System'].str.contains('Platinum')),
+      'Pricing'] = 'East Coast'
+</code></pre>
+<p>On the toy data set, this approach works as expected.  However, on the production data (which, unfortunately, I cannot share), I see the following error message:</p>
+<pre><code>KeyError:  &quot;None of [Float64Index([nan, nan, nan, nan, nan, nan...], \n       dtype='float64', length=583)] are in the [index]&quot;
+</code></pre>
+<p>At first, I thought that the error might be caused by whitespace in the column headers.  But, it doesn't look like this is the case.</p>
+<p>The column headers are assigned as follows:</p>
+<pre><code>for elem in elements:
+    d = {
+        'Manufacturer' : issue.fields.manufacturer,
+        'System' : issue.fields.system
+        }
+</code></pre>
+<p>(the data comes from a database)</p>
+<p>Any idea what might be causing this Key Error?</p>
+<p>Maybe I need to use an adaptation of:</p>
+<pre><code>df['Pricing'] = np.where(df['Manufacturer'].str.contains('Louis'), 'East Coast', 'None')
+</code></pre>
+<p>But, I'm not sure how to use <code>np.where</code> with two conditions... (see <a href=""https://stackoverflow.com/questions/64839924/how-to-create-a-column-in-a-pandas-dataframe-based-on-a-conditional-substring-se"">How to create a column in a Pandas dataframe based on a conditional substring search of one or more OTHER columns</a> for my original question).</p>
+<p>Thanks in advance!</p>
+",5179643.0,,,,,2020-11-15 03:08:20,Error when creating a new column in a Pandas dataframe from two other columns,<python><pandas><numpy>,1,0,,,,CC BY-SA 4.0
+64840555,1,,,2020-11-15 02:05:03,,0,7,"<p>I'm using a csv file to divide into 2 clusters. The blue one is the benign URL and the red one is the malicious URL. The problem is my instructor want to know the closest point of two clusters and the distance between them. I tried to use the distance between two centroids but it didn't work!
+Thank you for your help!
+Here the code and and the clusters:</p>
+<pre><code>from sklearn.cluster import KMeans
+from sklearn.metrics.pairwise import euclidean_distances
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = pd.read_csv(&quot;major_combined.csv&quot;)
+X_mal = data.iloc[:,[1, 5, 6, 11, 13, 15, 19, 20, 23]]
+
+kmeans_mal = KMeans(n_clusters=2, init='random', max_iter=300, n_init=10, random_state = 0)
+y_kmeans_mal = kmeans_mal.fit_predict(X_mal)
+
+plt.figure(figsize=(10,10))
+plt.scatter(X_mal.iloc[y_kmeans_mal == 0,4], X_mal.iloc[y_kmeans_mal == 0,8], s= 100, color = 'blue', label ='0')
+plt.scatter(X_mal.iloc[y_kmeans_mal == 1,4], X_mal.iloc[y_kmeans_mal == 1,8], s= 100, color = 'red', label ='1')
+plt.scatter(kmeans_mal.cluster_centers_[:,4], kmeans_mal.cluster_centers_[:,8], s= 300, color = 'yellow', label ='Centroid')
+plt.title('k-means clustering')
+plt.xlabel('document')
+plt.ylabel('window')
+plt.legend()
+plt.grid()
+plt.show()
+</code></pre>
+<p><a href=""https://i.stack.imgur.com/Hxd74.png"" rel=""nofollow noreferrer"">The k-means clustering</a></p>
+",13527066.0,,13527066.0,,2020-11-15 02:18:09,2020-11-15 02:18:09,Kmeans - Find the closest distance between two points of two cluster,<python-3.x><scikit-learn><k-means>,0,0,,,,CC BY-SA 4.0
+64840538,1,64840629.0,,2020-11-15 02:01:51,,0,32,"<p>Please help me figure out how to get to the back.
+I need to create a program with a loop that will accept integers from the user and then show their sum.However, the input must be completed using a combination (cntr+z or cntl+d depending on the system).Also, the program should check if these are integers, if it should give an error, then the result and exit.And yet I do not understand how I can make the input end with pressing cntr+z or ctrl+d.Please help me figure it out.
+Here is my code :</p>
+<pre><code>    number = 0
+    sum = 0
+    while True:
+        try:
+            listnum = input('Input numbers or press Enter to quit and get total sum: ')
+        except EOFError:
+            pass
+        try:
+            number = number + 1
+            sum = sum + int(listnum)   
+        except IOError:
+            number = number - 1
+            print('Error') 
+            break
+    print('The total of input is:',sum) 
+main()```
+</code></pre>
+",14640424.0,,,,,2020-11-15 02:30:58,How to signal the end of input using Cntr+z in python?,<python>,1,9,,,,CC BY-SA 4.0
+64840519,1,,,2020-11-15 01:57:44,,0,25,"<p>My dataset contains information on banks from 2009 to 2019, but some banks were merged/acquired or closed along the way, so I would like to remove any banks that did not exist from 2009 to 2019. For example, ID 32 and 56 do not exist in 2019, therefore they should be dropped. Here is how my data look like:</p>
+<pre><code>ID  Assets  Year
+32    10    2009
+45    5     2009
+56    24    2009
+78    9     2009
+32    11    2010
+45    6     2010
+56    31    2010
+78    14    2010
+...   ...   ...
+32    11    2018
+45    13    2018
+78    14    2018
+45    13    2019
+78    3     2019
+</code></pre>
+<p>Since only ID 45 and 78 exists from 2009 to 2019, everything else should be dropped. Here is how it should look like:</p>
+<pre><code>ID  Assets  Year
+45    5     2009
+78    9     2009
+45    6     2010
+78    14    2010
+...   ...   ...
+45    13    2018
+78    14    2018
+45    13    2019
+78    3     2019
+</code></pre>
+",12144034.0,,,,,2020-11-15 05:03:44,Pandas: Drop rows for IDs that do not exist for each year,<python><pandas>,1,6,,,,CC BY-SA 4.0
+64840514,1,,,2020-11-15 01:57:03,,0,18,"<p>Both objects (user.name) seem to be the same (memory address) yet have different name attributes. Is one attribute not updated yet because a Section method is still running?</p>
+<p>It would be great to have the FX functions in a Class, but globals() won't work anymore.</p>
+<p>More importantly - I would like to send arguments into my FX functions, for example the name to change the attribute to instead of hard-coding &quot;Bob&quot;, but with this construction &quot;globals()fx&quot; I can not. Can someone show me the right direction to solve this? Maybe the built in compile() function instead?</p>
+<pre><code>class Person:
+    def __init__(self):
+        self.name = &quot;Adam&quot;
+
+class Section:
+    def __init__(self, txt):
+        self.txt = txt
+        self.choices = []
+
+    def play(self):
+        print(self.txt)
+        for i, choice in enumerate(self.choices):
+            print(f&quot;{i + 1}) {choice.txt}&quot;)
+        if not self.choices:
+            quit()
+        self.input_choice_fx()
+
+    def input_choice_fx(self):
+        while True:
+            try:
+                dcsn = int(input(&quot;&quot;))
+                if len(self.choices) &gt;= dcsn &gt; 0:
+                    break
+                print(&quot;Enter choice number.&quot;)
+            except ValueError:
+                print(&quot;ValueError - Enter number&quot;)
+        self.choices[dcsn - 1].fx_fallout()
+        self.next_node = self.choices[dcsn - 1].dest
+        globals()[self.next_node].play()
+
+class Choice:
+    def __init__(self, node, txt, dest, *effects):
+        self.node = node
+        node.choices.append(self)
+        self.txt = txt
+        self.dest = dest
+        self.fx = []
+        for effect in effects:
+            self.fx.append(effect)
+
+    def fx_fallout(self):
+        for i in range(len(self.fx)):
+            globals()[self.fx[i]]()
+
+''' FX (Class!?) '''
+def rename():
+    user.name = &quot;Bob&quot;
+    print(f&quot;global: {user.__dict__}&quot;)
+    print(user)
+
+user = Person()
+n_1 = Section(&quot;n_1 txt&quot;)
+n_1_c_1 = Choice(n_1, &quot;rename choice&quot;, &quot;n_2&quot;, &quot;rename&quot;)
+n_1_c_2 = Choice(n_1, &quot;keep name choice&quot;, &quot;n_2&quot;)
+n_2 = Section(f&quot;inst lvl: {user.__dict__}\n{user}&quot;)
+n_2_c_1 = Choice(n_2, &quot;go back&quot;, &quot;n_1&quot;)
+n_1.play()
+</code></pre>
+",13843108.0,,13843108.0,,2020-11-15 02:40:35,2020-11-15 02:40:35,How to update instance attribute within method of other class and how to send arguments into functions called from globals() [x] ()?,<python><methods><globals>,0,0,,,,CC BY-SA 4.0
+64840507,1,64840641.0,,2020-11-15 01:54:53,,0,24,"<p>I get below dictionary data from aws. In python, how can I get it show timestamp instead of datetime.datetime(2020, 10, 26, 10, 57, 19, 215000, tzinfo=tzlocal()) there?</p>
+<p>Thanks,</p>
+<blockquote>
+<p>{
+&quot;ConfigRuleName&quot;: &quot;required-tags&quot;,
+&quot;OrderingTimestamp&quot;: datetime.datetime(
+2020, 10, 26, 10, 57, 19, 215000, tzinfo=tzlocal()
+),
+&quot;ResourceId&quot;: &quot;arn:aws:cloudformation:us-east-1:553763988947:stack/es-edge-security-headers-kells/f1924880-8311-11ea-9a26-0af77bd56d08&quot;,
+&quot;ResourceType&quot;: &quot;AWS::CloudFormation::Stack&quot;, }</p>
+</blockquote>
+",2920375.0,,,,,2020-11-15 02:22:38,Python: how to show timestamp other than datetime function,<python>,2,1,,,,CC BY-SA 4.0
+64840498,1,,,2020-11-15 01:53:02,,0,10,"<p>How i massive webscrap this?</p>
+<p>Look this interface:</p>
+<p><a href=""https://i.stack.imgur.com/79cpG.png"" rel=""nofollow noreferrer"">Image</a></p>
+<p>I want download information of alot of IDs so i do this script:</p>
+<pre><code>ID = 1 #set initial ID
+
+while ID &lt; 10:  #set final ID
+    driver.get('www.url.com')
+    userID = driver.find_element_by_xpath(&quot;(xpath of ID&quot;)
+    userID.clear() #clear ID
+    userID.send_keys(&quot;&quot;, ID) #type ID in ID 
+    driver.find_element_by_xpath(&quot;xpath of Search button&quot;).click()
+    ID += 1 #
+</code></pre>
+<p>Result:</p>
+<p><a href=""https://i.stack.imgur.com/nm2Jp.png"" rel=""nofollow noreferrer"">Image2</a></p>
+<p>But when the driver do the .click() the site open a new tab with a different url,</p>
+<p>How i webscrap all this pages to a txt or something like that?</p>
+",14640407.0,,,,,2020-11-15 01:53:02,How i do this massive Webscrap?,<python><selenium><webdriver>,0,1,,,,CC BY-SA 4.0
+64840495,1,,,2020-11-15 01:51:48,,-5,15,"<p>I'm currently a first-year student at University and I'm studying Computer Science and Maths. I'm really enjoying Computer Science and I want to make a retail bot like the AIO (AllInOne) bot that is able to work on limited-edition sneaker raffles/draw and restock of gadgets from Walmart etc and work on Shopify websites. I'm currently learning Java in Uni and I would say I'm between beginner and intermediate level but I don't find it too difficult. Do you guys recommend I can make this bot using Java as I see all these making bot tutorials are in Python and do you have any advice and tips on things I need to learn to make this bot?</p>
+",14597088.0,,,,,2020-11-15 01:51:48,I want to make a restock/buying bot,<java><python><bots>,0,0,,2020-11-15 02:14:36,,CC BY-SA 4.0
+64840473,1,,,2020-11-15 01:43:39,,0,9,"<p>I getting the following ValueError when using plt.boxplot() to plot four boxplot from Pandas four separate Pandas series.</p>
+<p>ValueError: The truth value of a DataFrame is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().</p>
+<p>Any thoughts on what is happening here would be greatly appreciated.</p>
+<pre><code>import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+ped_df = pd.read_csv(&quot;C:/NewMapsPlus/Map674/map674-module-04-zac-stanley/notebooks/data/AvgHourlyUserAllTypes.csv&quot;)
+
+btel = ped_df[['BTEL_Pedestrians']]
+cf = ped_df[['CF1_Pedestrians']]
+dr = ped_df[['DR1_Pedestrians']]
+hh = ped_df[['HawkHill_Pedestrians']]
+
+plt.figure(figsize=(15,6))
+plt.boxplot(btel, cf, dr, hh)
+
+</code></pre>
+",14640388.0,,,,,2020-11-15 01:43:39,Multiple Boxplots from Four Pandas Series Throws ValueError,<python><pandas><matplotlib>,0,0,,,,CC BY-SA 4.0
+64840461,1,,,2020-11-15 01:42:30,,-1,15,"<p>I've been working with UiPath and it's pretty good and easy to use. Drag and drop, and pretty straightforward for a programmer. My issue with it is the licensing. Their pricing is a mystery, and from what I've read it can cost from 10-20k.</p>
+<p>Anyway, I've also read that Python can automate tasks. If so, what sort of libraries/frameworks exists to perform similar to UiPath?</p>
+",10061975.0,,,,,2020-11-15 01:42:30,Can Python Automation work just as good as UiPath?,<python><rpa><uipath>,0,1,,2020-11-15 02:25:40,,CC BY-SA 4.0
+64840457,1,,,2020-11-15 01:41:35,,0,26,"<p>I am taking in user input and need to turn it into an AES encryption key.
+I have :</p>
+<pre><code>keyInput= input(&quot;Enter key:&quot;)
+key = keyInput.encode()
+print(key)
+</code></pre>
+<p>If I type in &quot;computer&quot; for the input. I get the result b'computer' for the output.</p>
+<p>Shouldn't it look something more like this? : b'\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18'</p>
+",14640390.0,,354577.0,,2020-11-15 02:01:45,2020-11-15 02:01:45,Encoding User Input,<python><encryption><hash><cryptography><aes>,2,4,,,,CC BY-SA 4.0
+64840443,1,64840722.0,,2020-11-15 01:37:41,,-1,31,"<p>I have a tree like this:</p>
+<pre><code>         A 
+      /  |   \
+    B    C    D
+  /  \   |   / | \
+ E    F  G  H  I  J
+</code></pre>
+<p>and I am trying to append the nodes of the tree to an empty list
+such that the list looks like:</p>
+<pre><code>[[A], [B, C, D], [E, F, G, H, I, J]]
+</code></pre>
+<p>Suppose that I have a root_node A and I don't know how deep my tree is.
+How can I append nodes from the tree to an empty list in the above-mentioned format?</p>
+<p>I tried breadth first search, but my list length is way longer than than the
+depth of the tree.</p>
+",13965517.0,,7782322.0,,2020-11-15 02:19:00,2020-11-15 02:39:22,Appending nodes of tree to a python list,<python><list><tree>,2,6,,,,CC BY-SA 4.0
+64840441,1,,,2020-11-15 01:37:17,,1,22,"<p>I've been tried to training model with tensorflow on google colab.
+This is the script code i've been tried to run</p>
+<pre><code>!python model_main_tf2.py --model_dir=models/my_ssd_resnet50_v1_fpn --pipeline_config_path=models/my_ssd_resnet50_v1_fpn/pipeline.config
+</code></pre>
+<p>but then i got this error:</p>
+<pre><code>python3: can't open file 'model_main_tf2.py': [Errno 2] No such file or directory
+</code></pre>
+<p>anyone know what should i do?</p>
+",14311884.0,,1234909.0,,2020-11-15 02:23:28,2020-11-15 02:37:37,python3: can't open file 'model_main_tf2.py': [Errno 2] No such file or directory,<python><tensorflow><deep-learning><google-colaboratory><tensorflow2.0>,1,1,,,,CC BY-SA 4.0
+64840429,1,,,2020-11-15 01:34:28,,0,13,"<p>So this may sound like a dumb question but after reading the documentation for whoosh alchemy I am very confused. So to preface a little, I am just looking for a simple solution to run full text searches on an SQL database (at this point I don't have a preference for which SQL database). And while researching I found out that SQLalchemy only supports full text searches on postgreSQL, which I have considered using but want to explore all my options. So after some more googling I found whooshalchemy that provides full text search capabilities on mySQL databases, and upon reading more about it I found it refrencing a &quot;WHOOSH_BASE&quot; and a &quot;Whoosh Index&quot;. This was vey confusing, as in all the examples the &quot;WHOOSH_BASE&quot; was just whoosh and no further explanation was given on its purpose. I am very confused what this &quot;WHOOSH_BASE&quot; is used for. Given the use of the word &quot;Whoosh Index&quot; I figured that it had to actually index the searchable fields or something along those lines.</p>
+<p>Now this is where I may start to sound stupid, I honestly have no idea what a Whoosh Index is and have been unable to find out anything useful about it. My concern is that the Whoosh Index is making searchable copies of the database's rows, which in my mind means I'm storing twice the data I should be.</p>
+<p>So all I need to really know is the purpose of the Whoosh Base and if using a Whoosh Base means I'm storing data twice.</p>
+",12349163.0,,400617.0,,2020-11-15 03:30:26,2020-11-15 03:30:26,What actually happens when you index using whooshalchemy?,<python><sqlalchemy><whoosh>,0,0,,,,CC BY-SA 4.0
+64840419,1,,,2020-11-15 01:31:33,,-3,10,"<p>I doing mobile voice assistant and i need server side and client side but i dont know how writing this on Django or on some other framework python. How do you help me?</p>
+",14267016.0,,,,,2020-11-15 01:31:33,How to make server for mobile app using Python and Django frameworks?,<python><django><mobile-application>,0,1,,,,CC BY-SA 4.0
+64840409,1,,,2020-11-15 01:29:12,,-2,17,"<p>The final grade is calculated by rounding the average grade to the nearest multiple of a half. So, for example, a 7.2 becomes a 7.0 and 7.3 becomes a 7.5. If this calculation results in a 5.5, the final grade becomes a 6.0.</p>
+<p>This is the code i have so far:
+[1]: <a href=""https://i.stack.imgur.com/CjGTT.png"" rel=""nofollow noreferrer"">https://i.stack.imgur.com/CjGTT.png</a></p>
+",14597782.0,,,,,2020-11-15 01:35:37,how to round numbers in python based on 2 varied conditions?,<python>,1,1,,,,CC BY-SA 4.0
