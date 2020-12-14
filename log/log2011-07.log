@@ -1,0 +1,60 @@
+0it [00:00, ?it/s]52it [00:00, 512.70it/s]104it [00:00, 513.76it/s]155it [00:00, 511.15it/s]206it [00:00, 509.07it/s]256it [00:00, 506.21it/s]306it [00:00, 503.03it/s]355it [00:00, 497.47it/s]404it [00:00, 494.57it/s]425it [00:00, 499.35it/s]
+Reading xml
+not well-formed (invalid token): line 1, column 0
+syntax error: line 1, column 0
+100000 records processed.   @2008-10-02T15:41:17.530
+200000 records processed.   @2008-11-19T23:51:47.077
+300000 records processed.   @2009-01-14T21:42:52.530
+400000 records processed.   @2009-02-23T16:38:29.460
+500000 records processed.   @2009-04-01T08:21:18.427
+600000 records processed.   @2009-05-06T12:01:52.550
+700000 records processed.   @2009-06-04T16:10:00.613
+800000 records processed.   @2009-07-02T11:09:25.400
+900000 records processed.   @2009-07-28T19:04:48.087
+1000000 records processed.   @2009-08-23T15:24:22.620
+1100000 records processed.   @2009-09-17T17:18:13.110
+1200000 records processed.   @2009-10-13T15:56:24.373
+1300000 records processed.   @2009-11-05T17:02:30.327
+1400000 records processed.   @2009-11-26T13:24:09.623
+1500000 records processed.   @2009-12-17T21:25:15.267
+1600000 records processed.   @2010-01-11T23:47:55.750
+1700000 records processed.   @2010-01-29T23:44:09.713
+1800000 records processed.   @2010-02-18T04:21:38.020
+1900000 records processed.   @2010-03-09T06:51:42.533
+2000000 records processed.   @2010-03-27T01:07:50.573
+2100000 records processed.   @2010-04-15T21:09:16.177
+2200000 records processed.   @2010-05-04T23:46:58.393
+2300000 records processed.   @2010-05-23T10:01:32.420
+2400000 records processed.   @2010-06-10T05:03:50.163
+2500000 records processed.   @2010-06-28T12:00:34.330
+2600000 records processed.   @2010-07-14T22:26:28.043
+2700000 records processed.   @2010-07-30T11:13:02.533
+2800000 records processed.   @2010-08-16T05:49:13.817
+2900000 records processed.   @2010-08-31T14:24:15.500
+3000000 records processed.   @2010-09-16T16:24:00.317
+3100000 records processed.   @2010-10-02T23:17:26.250
+3200000 records processed.   @2010-10-19T09:46:27.050
+3300000 records processed.   @2010-11-03T11:16:29.840
+3400000 records processed.   @2010-11-17T14:17:57.253
+3500000 records processed.   @2010-12-01T12:16:57.093
+3600000 records processed.   @2010-12-14T20:32:09.840
+3700000 records processed.   @2010-12-30T15:12:08.100
+3800000 records processed.   @2011-01-13T14:35:38.737
+3900000 records processed.   @2011-01-25T20:07:04.300
+4000000 records processed.   @2011-02-06T19:25:58.153
+4100000 records processed.   @2011-02-17T17:56:28.527
+4200000 records processed.   @2011-03-01T02:34:06.833
+4300000 records processed.   @2011-03-11T00:48:19.593
+4400000 records processed.   @2011-03-22T00:02:03.430
+4500000 records processed.   @2011-03-31T16:14:08.683
+4600000 records processed.   @2011-04-11T12:20:59.977
+4700000 records processed.   @2011-04-21T03:11:27.830
+4800000 records processed.   @2011-05-02T13:13:33.897
+4900000 records processed.   @2011-05-12T09:06:50.920
+5000000 records processed.   @2011-05-23T06:41:38.053
+5100000 records processed.   @2011-06-02T06:28:29.267
+5200000 records processed.   @2011-06-13T10:35:49.393
+5300000 records processed.   @2011-06-22T22:20:30.740
+Converting to Dataframe
+Merging
+Writting

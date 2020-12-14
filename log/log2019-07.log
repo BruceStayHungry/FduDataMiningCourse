@@ -1,0 +1,455 @@
+Reading xml
+not well-formed (invalid token): line 1, column 0
+syntax error: line 1, column 0
+100000 records processed.   @2008-10-02T15:41:17.530
+200000 records processed.   @2008-11-19T23:51:47.077
+300000 records processed.   @2009-01-14T21:42:52.530
+400000 records processed.   @2009-02-23T16:38:29.460
+500000 records processed.   @2009-04-01T08:21:18.427
+600000 records processed.   @2009-05-06T12:01:52.550
+700000 records processed.   @2009-06-04T16:10:00.613
+800000 records processed.   @2009-07-02T11:09:25.400
+900000 records processed.   @2009-07-28T19:04:48.087
+1000000 records processed.   @2009-08-23T15:24:22.620
+1100000 records processed.   @2009-09-17T17:18:13.110
+1200000 records processed.   @2009-10-13T15:56:24.373
+1300000 records processed.   @2009-11-05T17:02:30.327
+1400000 records processed.   @2009-11-26T13:24:09.623
+1500000 records processed.   @2009-12-17T21:25:15.267
+1600000 records processed.   @2010-01-11T23:47:55.750
+1700000 records processed.   @2010-01-29T23:44:09.713
+1800000 records processed.   @2010-02-18T04:21:38.020
+1900000 records processed.   @2010-03-09T06:51:42.533
+2000000 records processed.   @2010-03-27T01:07:50.573
+2100000 records processed.   @2010-04-15T21:09:16.177
+2200000 records processed.   @2010-05-04T23:46:58.393
+2300000 records processed.   @2010-05-23T10:01:32.420
+2400000 records processed.   @2010-06-10T05:03:50.163
+2500000 records processed.   @2010-06-28T12:00:34.330
+2600000 records processed.   @2010-07-14T22:26:28.043
+2700000 records processed.   @2010-07-30T11:13:02.533
+2800000 records processed.   @2010-08-16T05:49:13.817
+2900000 records processed.   @2010-08-31T14:24:15.500
+3000000 records processed.   @2010-09-16T16:24:00.317
+3100000 records processed.   @2010-10-02T23:17:26.250
+3200000 records processed.   @2010-10-19T09:46:27.050
+3300000 records processed.   @2010-11-03T11:16:29.840
+3400000 records processed.   @2010-11-17T14:17:57.253
+3500000 records processed.   @2010-12-01T12:16:57.093
+3600000 records processed.   @2010-12-14T20:32:09.840
+3700000 records processed.   @2010-12-30T15:12:08.100
+3800000 records processed.   @2011-01-13T14:35:38.737
+3900000 records processed.   @2011-01-25T20:07:04.300
+4000000 records processed.   @2011-02-06T19:25:58.153
+4100000 records processed.   @2011-02-17T17:56:28.527
+4200000 records processed.   @2011-03-01T02:34:06.833
+4300000 records processed.   @2011-03-11T00:48:19.593
+4400000 records processed.   @2011-03-22T00:02:03.430
+4500000 records processed.   @2011-03-31T16:14:08.683
+4600000 records processed.   @2011-04-11T12:20:59.977
+4700000 records processed.   @2011-04-21T03:11:27.830
+4800000 records processed.   @2011-05-02T13:13:33.897
+4900000 records processed.   @2011-05-12T09:06:50.920
+5000000 records processed.   @2011-05-23T06:41:38.053
+5100000 records processed.   @2011-06-02T06:28:29.267
+5200000 records processed.   @2011-06-13T10:35:49.393
+5300000 records processed.   @2011-06-22T22:20:30.740
+5400000 records processed.   @2011-07-03T22:49:43.917
+5500000 records processed.   @2011-07-13T19:41:45.463
+5600000 records processed.   @2011-07-23T20:22:10.393
+5700000 records processed.   @2011-08-03T03:10:14.813
+5800000 records processed.   @2011-08-12T11:13:23.880
+5900000 records processed.   @2011-08-23T06:29:32.287
+6000000 records processed.   @2011-09-01T19:29:35.697
+6100000 records processed.   @2011-09-12T23:06:31.573
+6200000 records processed.   @2011-09-22T13:56:26.670
+6300000 records processed.   @2011-10-03T13:44:18.060
+6400000 records processed.   @2011-10-13T13:53:12.293
+6500000 records processed.   @2011-10-24T10:44:02.593
+6600000 records processed.   @2011-11-03T09:26:13.853
+6700000 records processed.   @2011-11-13T13:30:30.727
+6800000 records processed.   @2011-11-22T17:10:22.673
+6900000 records processed.   @2011-12-01T22:43:35.983
+7000000 records processed.   @2011-12-11T23:10:39.330
+7100000 records processed.   @2011-12-21T08:33:17.380
+7200000 records processed.   @2012-01-02T23:05:41.430
+7300000 records processed.   @2012-01-11T18:51:14.257
+7400000 records processed.   @2012-01-20T15:22:54.943
+7500000 records processed.   @2012-01-30T11:02:05.603
+7600000 records processed.   @2012-02-07T18:50:32.150
+7700000 records processed.   @2012-02-15T20:48:21.497
+7800000 records processed.   @2012-02-23T20:02:09.257
+7900000 records processed.   @2012-03-02T19:33:04.973
+8000000 records processed.   @2012-03-11T20:42:06.937
+8100000 records processed.   @2012-03-19T21:51:57.053
+8200000 records processed.   @2012-03-27T21:35:37.413
+8300000 records processed.   @2012-04-04T19:21:15.223
+8400000 records processed.   @2012-04-13T08:29:02.787
+8500000 records processed.   @2012-04-21T08:46:34.027
+8600000 records processed.   @2012-04-30T01:27:59.337
+8700000 records processed.   @2012-05-08T11:46:39.970
+8800000 records processed.   @2012-05-16T12:26:33.657
+8900000 records processed.   @2012-05-24T14:33:20.440
+9000000 records processed.   @2012-06-02T02:57:57.973
+9100000 records processed.   @2012-06-11T12:16:11.107
+9200000 records processed.   @2012-06-19T12:00:38.080
+9300000 records processed.   @2012-06-27T07:25:08.563
+9400000 records processed.   @2012-07-05T10:15:20.477
+9500000 records processed.   @2012-07-13T01:09:09.817
+9600000 records processed.   @2012-07-20T17:23:21.440
+9700000 records processed.   @2012-07-28T20:56:22.603
+9800000 records processed.   @2012-08-06T08:47:07.260
+9900000 records processed.   @2012-08-14T04:39:42.877
+10000000 records processed.   @2012-08-22T06:24:41.603
+10100000 records processed.   @2012-08-30T00:50:16.177
+10200000 records processed.   @2012-09-06T23:25:16.517
+10300000 records processed.   @2012-09-14T20:12:23.990
+10400000 records processed.   @2012-09-23T18:22:34.347
+10500000 records processed.   @2012-10-01T16:15:23.740
+10600000 records processed.   @2012-10-09T11:44:06.817
+10700000 records processed.   @2012-10-16T18:55:10.163
+10800000 records processed.   @2012-10-24T04:03:49.673
+10900000 records processed.   @2012-10-31T18:41:36.160
+11000000 records processed.   @2012-11-08T10:51:21.390
+11100000 records processed.   @2012-11-16T00:07:01.217
+11200000 records processed.   @2012-11-23T13:23:34.240
+11300000 records processed.   @2012-11-30T19:36:25.093
+11400000 records processed.   @2012-12-08T03:14:55.737
+11500000 records processed.   @2012-12-15T21:28:08.533
+11600000 records processed.   @2012-12-24T09:12:21.737
+11700000 records processed.   @2013-01-03T16:27:02.077
+11800000 records processed.   @2013-01-10T22:11:24.083
+11900000 records processed.   @2013-01-18T04:53:25.620
+12000000 records processed.   @2013-01-25T05:33:15.970
+12100000 records processed.   @2013-02-01T03:19:12.260
+12200000 records processed.   @2013-02-07T22:42:52.063
+12300000 records processed.   @2013-02-14T23:10:41.353
+12400000 records processed.   @2013-02-21T18:36:38.033
+12500000 records processed.   @2013-02-28T11:08:45.330
+12600000 records processed.   @2013-03-06T21:48:13.797
+12700000 records processed.   @2013-03-13T11:26:21.547
+12800000 records processed.   @2013-03-19T20:12:21.777
+12900000 records processed.   @2013-03-26T11:11:17.183
+13000000 records processed.   @2013-04-02T11:01:44.750
+13100000 records processed.   @2013-04-08T20:33:58.733
+13200000 records processed.   @2013-04-15T11:54:38.437
+13300000 records processed.   @2013-04-22T04:19:17.673
+13400000 records processed.   @2013-04-28T15:28:48.890
+13500000 records processed.   @2013-05-05T22:05:23.673
+13600000 records processed.   @2013-05-13T05:04:23.297
+13700000 records processed.   @2013-05-19T22:53:16.243
+13800000 records processed.   @2013-05-27T02:20:59.250
+13900000 records processed.   @2013-06-03T05:29:42.347
+14000000 records processed.   @2013-06-10T02:11:31.473
+14100000 records processed.   @2013-06-17T07:38:52.520
+14200000 records processed.   @2013-06-24T04:40:31.907
+14300000 records processed.   @2013-06-30T19:12:17.043
+14400000 records processed.   @2013-07-08T05:28:36.320
+14500000 records processed.   @2013-07-15T00:20:50.257
+14600000 records processed.   @2013-07-21T08:43:29.493
+14700000 records processed.   @2013-07-27T06:50:38.270
+14800000 records processed.   @2013-08-02T14:24:26.657
+14900000 records processed.   @2013-08-09T09:45:16.133
+15000000 records processed.   @2013-08-16T07:44:20.597
+15100000 records processed.   @2013-08-23T01:58:16.130
+15200000 records processed.   @2013-08-29T18:54:02.240
+15300000 records processed.   @2013-09-05T19:48:42.107
+15400000 records processed.   @2013-09-12T16:49:50.487
+15500000 records processed.   @2013-09-19T12:52:59.770
+15600000 records processed.   @2013-09-26T05:57:32.447
+15700000 records processed.   @2013-10-02T20:22:54.253
+15800000 records processed.   @2013-10-09T12:00:39.997
+15900000 records processed.   @2013-10-16T06:36:39.180
+16000000 records processed.   @2013-10-22T15:27:17.103
+16100000 records processed.   @2013-10-28T23:59:03.137
+16200000 records processed.   @2013-11-04T17:22:34.647
+16300000 records processed.   @2013-11-11T07:13:34.747
+16400000 records processed.   @2013-11-17T01:22:45.373
+16500000 records processed.   @2013-11-22T18:31:56.540
+16600000 records processed.   @2013-11-29T08:41:42.180
+16700000 records processed.   @2013-12-05T18:29:02.970
+16800000 records processed.   @2013-12-12T01:06:25.813
+16900000 records processed.   @2013-12-18T13:13:25.060
+17000000 records processed.   @2013-12-26T13:44:19.760
+17100000 records processed.   @2014-01-03T20:11:20.080
+17200000 records processed.   @2014-01-10T06:02:16.280
+17300000 records processed.   @2014-01-16T12:46:41.443
+17400000 records processed.   @2014-01-22T16:15:21.447
+17500000 records processed.   @2014-01-28T17:57:34.430
+17600000 records processed.   @2014-02-03T21:32:56.637
+17700000 records processed.   @2014-02-09T20:21:00.723
+17800000 records processed.   @2014-02-14T21:21:32.277
+17900000 records processed.   @2014-02-20T17:24:04.420
+18000000 records processed.   @2014-02-26T12:08:57.197
+18100000 records processed.   @2014-03-04T07:52:16.490
+18200000 records processed.   @2014-03-10T01:08:55.880
+18300000 records processed.   @2014-03-14T20:23:53.817
+18400000 records processed.   @2014-03-20T17:27:24.640
+18500000 records processed.   @2014-03-26T15:59:43.510
+18600000 records processed.   @2014-04-01T16:53:42.903
+18700000 records processed.   @2014-04-07T16:11:40.030
+18800000 records processed.   @2014-04-13T13:36:13.693
+18900000 records processed.   @2014-04-19T13:36:16.500
+19000000 records processed.   @2014-04-25T15:25:23.623
+19100000 records processed.   @2014-05-02T09:26:18.777
+19200000 records processed.   @2014-05-08T22:08:16.657
+19300000 records processed.   @2014-05-15T15:10:21.453
+19400000 records processed.   @2014-05-22T16:27:59.547
+19500000 records processed.   @2014-05-29T19:49:03.607
+19600000 records processed.   @2014-06-06T00:20:23.280
+19700000 records processed.   @2014-06-13T09:22:19.210
+19800000 records processed.   @2014-06-20T16:06:53.610
+19900000 records processed.   @2014-06-27T21:21:37.810
+20000000 records processed.   @2014-07-05T19:11:19.023
+20100000 records processed.   @2014-07-13T03:52:35.510
+20200000 records processed.   @2014-07-20T04:20:03.967
+20300000 records processed.   @2014-07-26T19:37:14.273
+20400000 records processed.   @2014-08-03T06:00:29.870
+20500000 records processed.   @2014-08-10T16:11:08.717
+20600000 records processed.   @2014-08-18T06:53:23.930
+20700000 records processed.   @2014-08-25T12:42:17.697
+20800000 records processed.   @2014-09-02T01:37:53.087
+20900000 records processed.   @2014-09-09T11:34:36.580
+21000000 records processed.   @2014-09-16T15:13:39.623
+21100000 records processed.   @2014-09-23T18:04:28.847
+21200000 records processed.   @2014-09-30T21:34:50.113
+21300000 records processed.   @2014-10-08T14:29:38.350
+21400000 records processed.   @2014-10-15T17:06:46.753
+21500000 records processed.   @2014-10-22T21:02:00.797
+21600000 records processed.   @2014-10-30T05:33:09.287
+21700000 records processed.   @2014-11-06T08:05:51.997
+21800000 records processed.   @2014-11-13T06:59:12.063
+21900000 records processed.   @2014-11-20T05:09:49.200
+22000000 records processed.   @2014-11-27T00:31:07.913
+22100000 records processed.   @2014-12-04T09:43:38.693
+22200000 records processed.   @2014-12-11T10:14:28.040
+22300000 records processed.   @2014-12-18T15:41:03.347
+22400000 records processed.   @2014-12-28T21:20:02.687
+22500000 records processed.   @2015-01-06T23:53:56.733
+22600000 records processed.   @2015-01-14T08:41:21.433
+22700000 records processed.   @2015-01-21T11:58:06.313
+22800000 records processed.   @2015-01-28T14:55:39.423
+22900000 records processed.   @2015-02-04T14:20:40.787
+23000000 records processed.   @2015-02-11T10:01:45.047
+23100000 records processed.   @2015-02-18T08:41:46.397
+23200000 records processed.   @2015-02-24T21:23:57.317
+23300000 records processed.   @2015-03-03T14:35:46.123
+23400000 records processed.   @2015-03-10T10:57:35.780
+23500000 records processed.   @2015-03-17T00:26:32.240
+23600000 records processed.   @2015-03-23T18:03:19.253
+23700000 records processed.   @2015-03-30T11:42:36.237
+23800000 records processed.   @2015-04-06T14:28:59.963
+23900000 records processed.   @2015-04-13T08:03:16.910
+24000000 records processed.   @2015-04-19T05:09:33.477
+24100000 records processed.   @2015-04-24T14:30:20.187
+24200000 records processed.   @2015-04-30T18:23:57.673
+24300000 records processed.   @2015-05-07T12:07:05.547
+24400000 records processed.   @2015-05-13T22:54:42.243
+24500000 records processed.   @2015-05-20T15:04:31.307
+24600000 records processed.   @2015-05-27T10:50:28.207
+24700000 records processed.   @2015-06-02T21:04:18.367
+24800000 records processed.   @2015-06-09T13:13:39.797
+24900000 records processed.   @2015-06-16T05:39:17.550
+25000000 records processed.   @2015-06-22T17:39:28.450
+25100000 records processed.   @2015-06-29T10:02:45.117
+25200000 records processed.   @2015-07-06T06:44:42.580
+25300000 records processed.   @2015-07-12T06:38:40.020
+25400000 records processed.   @2015-07-18T12:08:24.340
+25500000 records processed.   @2015-07-24T17:40:15.873
+25600000 records processed.   @2015-07-31T09:19:07.257
+25700000 records processed.   @2015-08-07T01:31:52.357
+25800000 records processed.   @2015-08-13T18:32:20.090
+25900000 records processed.   @2015-08-20T15:20:55.413
+26000000 records processed.   @2015-08-27T11:01:42.700
+26100000 records processed.   @2015-09-03T10:49:24.960
+26200000 records processed.   @2015-09-10T11:58:05.947
+26300000 records processed.   @2015-09-17T10:29:55.627
+26400000 records processed.   @2015-09-24T06:36:08.777
+26500000 records processed.   @2015-10-01T07:34:14.923
+26600000 records processed.   @2015-10-08T07:29:47.487
+26700000 records processed.   @2015-10-14T22:19:13.140
+26800000 records processed.   @2015-10-21T16:40:03.663
+26900000 records processed.   @2015-10-28T13:19:13.377
+27000000 records processed.   @2015-11-04T11:13:17.903
+27100000 records processed.   @2015-11-11T09:54:23.190
+27200000 records processed.   @2015-11-18T08:38:41.267
+27300000 records processed.   @2015-11-24T19:56:33.370
+27400000 records processed.   @2015-12-01T22:09:40.577
+27500000 records processed.   @2015-12-08T15:54:55.970
+27600000 records processed.   @2015-12-15T10:59:57.227
+27700000 records processed.   @2015-12-22T11:18:52.037
+27800000 records processed.   @2015-12-31T06:48:24.893
+27900000 records processed.   @2016-01-08T05:19:57.913
+28000000 records processed.   @2016-01-14T18:50:36.740
+28100000 records processed.   @2016-01-21T13:17:38.237
+28200000 records processed.   @2016-01-28T02:42:09.350
+28300000 records processed.   @2016-02-03T14:19:12.253
+28400000 records processed.   @2016-02-10T05:41:38.933
+28500000 records processed.   @2016-02-16T15:49:46.427
+28600000 records processed.   @2016-02-22T22:33:53.667
+28700000 records processed.   @2016-02-29T06:44:47.767
+28800000 records processed.   @2016-03-05T23:59:33.343
+28900000 records processed.   @2016-03-11T21:26:33.080
+29000000 records processed.   @2016-03-18T08:12:11.230
+29100000 records processed.   @2016-03-24T20:06:04.797
+29200000 records processed.   @2016-03-31T16:00:49.857
+29300000 records processed.   @2016-04-07T05:37:50.223
+29400000 records processed.   @2016-04-13T11:53:07.213
+29500000 records processed.   @2016-04-19T18:07:21.460
+29600000 records processed.   @2016-04-26T03:15:37.617
+29700000 records processed.   @2016-05-02T12:57:51.703
+29800000 records processed.   @2016-05-09T09:17:45.837
+29900000 records processed.   @2016-05-15T15:43:10.743
+30000000 records processed.   @2016-05-22T00:21:52.723
+30100000 records processed.   @2016-05-28T11:11:59.107
+30200000 records processed.   @2016-06-04T07:33:43.493
+30300000 records processed.   @2016-06-10T22:41:13.783
+30400000 records processed.   @2016-06-17T17:58:25.937
+30500000 records processed.   @2016-06-24T15:14:30.403
+30600000 records processed.   @2016-07-01T12:38:52.527
+30700000 records processed.   @2016-07-08T19:57:55.837
+30800000 records processed.   @2016-07-15T19:37:44.147
+30900000 records processed.   @2016-07-22T19:08:04.723
+31000000 records processed.   @2016-07-29T16:17:15.317
+31100000 records processed.   @2016-08-05T17:08:13.573
+31200000 records processed.   @2016-08-12T18:11:37.583
+31300000 records processed.   @2016-08-20T10:43:21.917
+31400000 records processed.   @2016-08-27T15:03:26.803
+31500000 records processed.   @2016-09-04T00:14:36.163
+31600000 records processed.   @2016-09-12T03:44:28.110
+31700000 records processed.   @2016-09-19T12:30:06.733
+31800000 records processed.   @2016-09-26T12:44:50.590
+31900000 records processed.   @2016-10-03T13:51:31.227
+32000000 records processed.   @2016-10-10T17:09:40.790
+32100000 records processed.   @2016-10-17T19:00:33.373
+32200000 records processed.   @2016-10-24T17:50:38.770
+32300000 records processed.   @2016-11-01T06:40:45.240
+32400000 records processed.   @2016-11-08T11:56:32.827
+32500000 records processed.   @2016-11-15T19:00:26.047
+32600000 records processed.   @2016-11-22T17:11:56.053
+32700000 records processed.   @2016-11-30T00:23:56.060
+32800000 records processed.   @2016-12-07T02:49:37.803
+32900000 records processed.   @2016-12-14T09:24:07.890
+33000000 records processed.   @2016-12-21T17:54:32.523
+33100000 records processed.   @2016-12-30T15:58:55.177
+33200000 records processed.   @2017-01-08T00:01:21.710
+33300000 records processed.   @2017-01-15T01:43:15.333
+33400000 records processed.   @2017-01-22T00:56:23.053
+33500000 records processed.   @2017-01-29T05:01:50.740
+33600000 records processed.   @2017-02-04T23:59:25.430
+33700000 records processed.   @2017-02-11T14:06:45.030
+33800000 records processed.   @2017-02-17T20:33:32.960
+33900000 records processed.   @2017-02-24T10:49:41.073
+34000000 records processed.   @2017-03-02T22:42:10.400
+34100000 records processed.   @2017-03-09T14:18:38.837
+34200000 records processed.   @2017-03-16T07:05:18.237
+34300000 records processed.   @2017-03-22T16:09:36.847
+34400000 records processed.   @2017-03-29T08:02:04.593
+34500000 records processed.   @2017-04-04T22:01:10.427
+34600000 records processed.   @2017-04-11T15:39:08.730
+34700000 records processed.   @2017-04-18T20:32:48.260
+34800000 records processed.   @2017-04-25T13:55:17.373
+34900000 records processed.   @2017-05-02T17:23:39.157
+35000000 records processed.   @2017-05-09T15:52:43.943
+35100000 records processed.   @2017-05-16T15:05:12.680
+35200000 records processed.   @2017-05-23T12:59:10.763
+35300000 records processed.   @2017-05-30T15:24:49.007
+35400000 records processed.   @2017-06-06T18:14:09.293
+35500000 records processed.   @2017-06-13T17:55:08.960
+35600000 records processed.   @2017-06-20T17:36:13.593
+35700000 records processed.   @2017-06-27T21:40:34.970
+35800000 records processed.   @2017-07-05T08:57:46.317
+35900000 records processed.   @2017-07-12T08:42:35.533
+36000000 records processed.   @2017-07-19T07:35:09.157
+36100000 records processed.   @2017-07-25T23:55:48.207
+36200000 records processed.   @2017-08-01T18:57:35.087
+36300000 records processed.   @2017-08-08T19:07:15.503
+36400000 records processed.   @2017-08-16T07:19:26.697
+36500000 records processed.   @2017-08-23T11:45:30.963
+36600000 records processed.   @2017-08-30T20:54:08.563
+36700000 records processed.   @2017-09-07T16:24:16.777
+36800000 records processed.   @2017-09-15T06:43:53.510
+36900000 records processed.   @2017-09-22T13:09:15.790
+37000000 records processed.   @2017-09-29T22:44:25.563
+37100000 records processed.   @2017-10-08T11:21:52.800
+37200000 records processed.   @2017-10-16T04:49:22.430
+37300000 records processed.   @2017-10-23T17:52:04.767
+37400000 records processed.   @2017-10-31T05:20:19.120
+37500000 records processed.   @2017-11-07T15:43:17.253
+37600000 records processed.   @2017-11-14T21:20:34.237
+37700000 records processed.   @2017-11-22T07:58:43.413
+37800000 records processed.   @2017-11-29T23:11:55.697
+37900000 records processed.   @2017-12-07T14:22:55.130
+38000000 records processed.   @2017-12-15T10:32:06.463
+38100000 records processed.   @2017-12-24T21:13:09.787
+38200000 records processed.   @2018-01-04T14:26:26.970
+38300000 records processed.   @2018-01-12T16:20:12.770
+38400000 records processed.   @2018-01-21T02:46:39.237
+38500000 records processed.   @2018-01-29T06:16:32.060
+38600000 records processed.   @2018-02-05T17:30:10.463
+38700000 records processed.   @2018-02-13T07:44:01.957
+38800000 records processed.   @2018-02-20T21:58:29.187
+38900000 records processed.   @2018-02-28T11:50:22.357
+39000000 records processed.   @2018-03-07T23:04:31.540
+39100000 records processed.   @2018-03-15T10:27:14.943
+39200000 records processed.   @2018-03-22T15:18:18.960
+39300000 records processed.   @2018-03-29T22:28:27.103
+39400000 records processed.   @2018-04-06T19:05:30.580
+39500000 records processed.   @2018-04-14T16:15:57.880
+39600000 records processed.   @2018-04-22T16:19:47.843
+39700000 records processed.   @2018-04-30T13:02:05.057
+39800000 records processed.   @2018-05-08T12:24:54.243
+39900000 records processed.   @2018-05-16T08:34:10.237
+40000000 records processed.   @2018-05-23T22:30:40.633
+40100000 records processed.   @2018-05-31T18:48:03.923
+40200000 records processed.   @2018-06-08T15:49:43.520
+40300000 records processed.   @2018-06-17T14:00:00.253
+40400000 records processed.   @2018-06-25T18:31:55.110
+40500000 records processed.   @2018-07-03T20:03:19.447
+40600000 records processed.   @2018-07-11T21:07:50.427
+40700000 records processed.   @2018-07-19T15:51:48.567
+40800000 records processed.   @2018-07-27T14:16:04.053
+40900000 records processed.   @2018-08-05T06:11:56.860
+41000000 records processed.   @2018-08-13T13:46:39.713
+41100000 records processed.   @2018-08-21T18:37:50.647
+41200000 records processed.   @2018-08-29T19:02:46.507
+41300000 records processed.   @2018-09-07T05:13:31.417
+41400000 records processed.   @2018-09-15T17:38:29.163
+41500000 records processed.   @2018-09-24T11:55:58.100
+41600000 records processed.   @2018-10-02T14:10:37.997
+41700000 records processed.   @2018-10-10T14:15:38.437
+41800000 records processed.   @2018-10-18T13:02:15.197
+41900000 records processed.   @2018-10-26T10:25:31.577
+42000000 records processed.   @2018-11-04T09:11:22.080
+42100000 records processed.   @2018-11-12T22:41:40.533
+42200000 records processed.   @2018-11-21T02:20:45.140
+42300000 records processed.   @2018-11-29T11:12:46.783
+42400000 records processed.   @2018-12-07T13:41:30.390
+42500000 records processed.   @2018-12-16T18:08:01.747
+42600000 records processed.   @2018-12-26T23:45:35.547
+42700000 records processed.   @2019-01-07T07:51:03.503
+42800000 records processed.   @2019-01-15T16:16:03.990
+42900000 records processed.   @2019-01-23T20:12:09.500
+43000000 records processed.   @2019-01-31T17:38:12.290
+43100000 records processed.   @2019-02-08T17:59:22.870
+43200000 records processed.   @2019-02-16T22:52:52.627
+43300000 records processed.   @2019-02-25T05:31:32.993
+43400000 records processed.   @2019-03-04T21:25:31.377
+43500000 records processed.   @2019-03-12T14:15:50.740
+43600000 records processed.   @2019-03-20T07:01:55.493
+43700000 records processed.   @2019-03-27T21:55:35.090
+43800000 records processed.   @2019-04-04T14:38:04.433
+43900000 records processed.   @2019-04-12T11:01:29.140
+44000000 records processed.   @2019-04-21T12:08:30.697
+44100000 records processed.   @2019-04-30T06:15:21.307
+44200000 records processed.   @2019-05-08T18:53:19.220
+44300000 records processed.   @2019-05-17T01:28:18.617
+44400000 records processed.   @2019-05-25T23:32:50.127
+44500000 records processed.   @2019-06-03T23:17:01.973
+44600000 records processed.   @2019-06-12T08:40:10.290
+44700000 records processed.   @2019-06-20T06:25:10.230
+44800000 records processed.   @2019-06-28T07:49:02.0470it [00:00, ?it/s]50it [00:00, 492.87it/s]101it [00:00, 496.36it/s]153it [00:00, 502.58it/s]204it [00:00, 503.74it/s]253it [00:00, 496.81it/s]303it [00:00, 497.44it/s]350it [00:00, 487.24it/s]398it [00:00, 482.54it/s]445it [00:00, 476.77it/s]493it [00:01, 477.72it/s]541it [00:01, 476.67it/s]589it [00:01, 474.94it/s]636it [00:01, 466.33it/s]683it [00:01, 465.47it/s]730it [00:01, 457.41it/s]776it [00:01, 451.22it/s]822it [00:01, 450.44it/s]867it [00:01, 449.35it/s]912it [00:01, 441.09it/s]957it [00:02, 435.65it/s]1001it [00:02, 430.15it/s]1045it [00:02, 426.17it/s]1088it [00:02, 418.94it/s]1130it [00:02, 418.28it/s]1172it [00:02, 413.79it/s]1214it [00:02, 410.55it/s]1256it [00:02, 406.90it/s]1297it [00:02, 404.92it/s]1338it [00:02, 401.77it/s]1379it [00:03, 398.56it/s]1419it [00:03, 395.81it/s]1460it [00:03, 397.44it/s]1500it [00:03, 392.54it/s]1540it [00:03, 388.30it/s]1579it [00:03, 304.50it/s]1617it [00:03, 322.49it/s]1655it [00:03, 335.89it/s]1693it [00:04, 346.61it/s]1730it [00:04, 352.67it/s]1769it [00:04, 360.69it/s]1806it [00:04, 361.69it/s]1843it [00:04, 361.51it/s]1880it [00:04, 360.62it/s]1917it [00:04, 359.66it/s]1954it [00:04, 358.30it/s]1990it [00:04, 356.24it/s]2026it [00:04, 354.09it/s]2062it [00:05, 352.80it/s]2098it [00:05, 352.95it/s]2134it [00:05, 351.93it/s]2170it [00:05, 351.06it/s]2206it [00:05, 350.25it/s]2242it [00:05, 348.33it/s]2277it [00:05, 347.14it/s]2312it [00:05, 345.65it/s]2347it [00:05, 343.99it/s]2382it [00:05, 342.27it/s]2417it [00:06, 340.30it/s]2452it [00:06, 339.19it/s]2486it [00:06, 337.75it/s]2520it [00:06, 326.92it/s]2553it [00:06, 324.20it/s]2586it [00:06, 324.71it/s]2619it [00:06, 325.26it/s]2652it [00:06, 325.34it/s]2685it [00:06, 324.24it/s]2718it [00:06, 323.54it/s]2751it [00:07, 322.05it/s]2784it [00:07, 321.50it/s]2817it [00:07, 319.63it/s]2850it [00:07, 321.45it/s]2883it [00:07, 319.24it/s]2915it [00:07, 317.12it/s]2947it [00:07, 313.92it/s]2980it [00:07, 317.04it/s]3012it [00:07, 314.71it/s]3044it [00:08, 312.13it/s]3076it [00:08, 308.98it/s]3107it [00:08, 307.51it/s]3138it [00:08, 304.16it/s]3170it [00:08, 307.28it/s]3201it [00:08, 303.67it/s]3232it [00:08, 298.19it/s]3262it [00:08, 297.40it/s]3293it [00:08, 300.89it/s]3324it [00:08, 297.25it/s]3354it [00:09, 294.97it/s]3384it [00:09, 294.39it/s]3415it [00:09, 297.45it/s]3445it [00:09, 255.99it/s]3475it [00:09, 265.58it/s]3504it [00:09, 272.32it/s]3534it [00:09, 277.99it/s]3563it [00:09, 280.47it/s]3592it [00:09, 282.56it/s]3621it [00:10, 282.75it/s]3650it [00:10, 282.55it/s]3679it [00:10, 282.43it/s]3708it [00:10, 281.93it/s]3737it [00:10, 279.87it/s]3766it [00:10, 280.17it/s]3795it [00:10, 278.84it/s]3823it [00:10, 274.43it/s]3851it [00:10, 273.00it/s]3879it [00:10, 273.05it/s]3907it [00:11, 271.94it/s]3935it [00:11, 269.87it/s]3963it [00:11, 270.87it/s]3991it [00:11, 271.31it/s]4019it [00:11, 271.39it/s]4047it [00:11, 271.73it/s]4075it [00:11, 271.07it/s]4103it [00:11, 270.86it/s]4131it [00:11, 270.72it/s]4159it [00:12, 224.50it/s]4186it [00:12, 235.67it/s]4214it [00:12, 246.14it/s]4242it [00:12, 252.91it/s]4270it [00:12, 258.31it/s]4298it [00:12, 262.63it/s]4326it [00:12, 264.95it/s]4353it [00:12, 265.14it/s]4380it [00:12, 266.56it/s]4407it [00:12, 266.26it/s]4434it [00:13, 264.85it/s]4461it [00:13, 265.33it/s]4488it [00:13, 264.68it/s]4515it [00:13, 265.16it/s]4542it [00:13, 262.07it/s]4569it [00:13, 261.51it/s]4596it [00:13, 261.40it/s]4623it [00:13, 258.75it/s]4649it [00:13, 257.72it/s]4676it [00:14, 258.64it/s]4702it [00:14, 258.41it/s]4728it [00:14, 256.91it/s]4754it [00:14, 256.39it/s]4780it [00:14, 256.06it/s]4806it [00:14, 249.93it/s]4832it [00:14, 248.39it/s]4858it [00:14, 249.37it/s]4883it [00:14, 247.86it/s]4908it [00:14, 245.26it/s]4933it [00:15, 244.06it/s]4959it [00:15, 246.17it/s]4984it [00:15, 245.70it/s]5009it [00:15, 244.50it/s]5034it [00:15, 242.38it/s]5060it [00:15, 244.82it/s]5085it [00:15, 243.93it/s]5110it [00:15, 241.89it/s]5135it [00:15, 238.35it/s]5160it [00:16, 240.61it/s]5185it [00:16, 242.76it/s]5210it [00:16, 244.14it/s]5236it [00:16, 246.18it/s]5261it [00:16, 246.97it/s]5286it [00:16, 247.09it/s]5311it [00:16, 246.61it/s]5336it [00:16, 243.10it/s]5361it [00:16, 243.55it/s]5386it [00:16, 242.82it/s]5411it [00:17, 240.81it/s]5436it [00:17, 236.68it/s]5460it [00:17, 235.91it/s]5484it [00:17, 236.67it/s]5508it [00:17, 236.81it/s]5532it [00:17, 233.94it/s]5556it [00:17, 235.27it/s]5580it [00:17, 235.97it/s]5604it [00:17, 232.54it/s]5628it [00:17, 229.42it/s]5652it [00:18, 230.76it/s]5676it [00:18, 232.78it/s]5700it [00:18, 231.69it/s]5724it [00:18, 229.01it/s]5747it [00:18, 228.74it/s]5771it [00:18, 230.40it/s]5795it [00:18, 230.13it/s]5819it [00:18, 227.68it/s]5842it [00:18, 227.41it/s]5866it [00:19, 228.82it/s]5890it [00:19, 229.95it/s]5914it [00:19, 227.83it/s]5937it [00:19, 224.17it/s]5960it [00:19, 224.08it/s]5983it [00:19, 222.77it/s]6006it [00:19, 219.89it/s]6029it [00:19, 218.07it/s]6052it [00:19, 219.69it/s]6074it [00:19, 218.52it/s]6096it [00:20, 217.48it/s]6118it [00:20, 215.62it/s]6140it [00:20, 215.28it/s]6163it [00:20, 218.00it/s]6185it [00:20, 203.62it/s]6207it [00:20, 206.91it/s]6228it [00:20, 207.78it/s]6250it [00:20, 210.05it/s]6272it [00:20, 212.44it/s]6294it [00:20, 210.64it/s]6316it [00:21, 208.62it/s]6337it [00:21, 207.45it/s]6359it [00:21, 209.51it/s]6381it [00:21, 210.73it/s]6403it [00:21, 212.12it/s]6425it [00:21, 208.76it/s]6446it [00:21, 208.70it/s]6468it [00:21, 210.39it/s]6490it [00:21, 211.17it/s]6512it [00:22, 211.84it/s]6534it [00:22, 209.15it/s]6556it [00:22, 209.92it/s]6578it [00:22, 210.33it/s]6600it [00:22, 210.52it/s]6622it [00:22, 212.92it/s]6644it [00:22, 209.69it/s]6666it [00:22, 209.84it/s]6688it [00:22, 210.13it/s]6699it [00:22, 292.25it/s]
+
+Converting to Dataframe
+Merging
+Writting
